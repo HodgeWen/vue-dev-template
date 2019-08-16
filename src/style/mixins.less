@@ -1,0 +1,27 @@
+// 全局混入
+.flex(@justify-content, @align, @wrap: wrap) {
+  display: flex;
+  justify-content: @justify-content;
+  align-content: @align;
+  align-items: @align;
+  flex-wrap: @wrap;
+}
+
+.nowrap () {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.clear () {
+  &::after {
+    content: '';
+    clear: both;
+    height: 0;
+    display: block;
+  }
+}
+
+
+// 全局变量
+@theme-color: #fa4b6e;

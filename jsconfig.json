@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "apis/*": ["src/apis/*"],
+      "utils/*": ["src/utils/*"],
+      "views/*": ["src/views/*"],
+      "style/*": ["src/style/*"],
+      "components/*": ["src/components/*"],
+      "images/*": ["src/assets/images/*"],
+      "fonts/*": ["src/assets/fonts/*"]
+    },
+    "moduleResolution": "node",
+    "target": "esnext"
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
