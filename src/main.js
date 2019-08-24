@@ -4,7 +4,7 @@ import store from './store'
 import components from 'components'
 import 'utils/date'
 import 'style/normalize.less'
-import 'style/iview-overwrite'
+import 'style/iview-overwrite.less'
 
 Vue.use(components)
 
