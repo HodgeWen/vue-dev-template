@@ -5,6 +5,8 @@ const resolve = dir => {
   return path.join(__dirname, dir)
 }
 
+
+
 // 获取文件夹目录, 用来获取别名
 const getDirs = (url = './') => {
   const ret = []
