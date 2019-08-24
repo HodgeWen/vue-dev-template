@@ -4,7 +4,7 @@ import {
 } from 'iview'
 
 const components = {
-  'i-button': Button, 'i-col': Table, 'i-input': Input, 'i-form': Form,
+  'i-button': Button, 'i-table': Table, 'i-input': Input, 'i-form': Form,
   'i-select': Select, 'i-option': Option, Upload
 }
 
