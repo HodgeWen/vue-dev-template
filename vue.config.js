@@ -5,18 +5,8 @@ const resolve = dir => {
   return path.join(__dirname, dir)
 }
 
-
-
 // 获取文件夹目录, 用来获取别名
-const getDirs = (url = './') => {
-  const ret = []
-  const files = fs.readdirSync(resolve(url))
-
-  files.forEach(file => {
-    fs.statSync(resolve(url + file)).isDirectory() && ret.push(file)
-  })
-  return ret
-}
+const getDirs = (url = './') => fs.readdirSync(resolve(url)).filter(file => fs.statSync(resolve(url + file)).isDirectory())
 
 const BASE_URL = '/' // process.env.NODE_ENV === 'production' ? '/' : '/'
 module.exports = {
