@@ -32,6 +32,7 @@
 <script>
 import './index.less'
 export default {
+  name: 'VTable',
   components: {
     RenderItem: {
       props: {

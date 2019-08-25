@@ -11,11 +11,14 @@
 </template>
 
 <script>
-import VTable from 'components/table'
+// 组件已全局注册，组件局部引入并注册
+// 按需引入请修改main.js文件[查看main.js文件中的注释]
+// import VTable from 'components/table'
 export default {
-  components: {
-    VTable
-  },
+  // 组件局部引入
+  // components: {
+  //   VTable
+  // },
   data: vm => ({
     // 开发规范
     // 1. 模板上需要的数据务必声明好, 好处在于可以知道此数据的类型, 以及避免一些错误
