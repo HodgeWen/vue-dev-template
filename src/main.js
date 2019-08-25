@@ -1,13 +1,14 @@
 import Vue from 'vue'
 import router from './router'
 import store from './store'
-import components from 'components'
+// import components from 'components'
 import 'utils/date'
 import 'style/normalize.less'
 import 'style/iview-overwrite.less'
-
-Vue.use(components)
-
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+// Vue.use(components)
+Vue.use(ElementUI)
 Vue.config.productionTip = false
 
 new Vue({
