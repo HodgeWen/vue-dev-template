@@ -1,5 +1,6 @@
 <template>
   <div class="layout-container">
+    <!-- 表格 start -->
     <v-table
       ref="table"
       :data="table.data"
@@ -7,18 +8,25 @@
       :total="table.total"
       @fetch-data="fetchTableData"
     />
+    <!-- 表格 end -->
+
+    <!-- 图表 start -->
+    <v-chart :option="chart.option" />
+    <!-- 图表 end -->
   </div>
 </template>
 
 <script>
 // 组件已全局注册，组件局部引入并注册
 // 按需引入请修改main.js文件[查看main.js文件中的注释]
-// import VTable from 'components/table'
+// import VTable from 'components/Table'
+import VChart from 'components/Chart'
 export default {
   // 组件局部引入
-  // components: {
-  //   VTable
-  // },
+  components: {
+    // VTable,
+    VChart
+  },
   data: vm => ({
     // 开发规范
     // 1. 模板上需要的数据务必声明好, 好处在于可以知道此数据的类型, 以及避免一些错误
@@ -40,14 +48,18 @@ export default {
         { type: 'selection' },
         { label: '姓名', prop: 'name' },
         { label: '年龄', prop: 'age' },
-        { label: '性别', prop: 'sex', formatter(row, column, cellValue, index) {
-          // 查看控制台得到该函数的所有参数
-          // console.log(row, column, cellValue, index)
-          return {
-            FEMALE: '女',
-            MALE: '男'
-          }[cellValue]
-        } },
+        {
+          label: '性别',
+          prop: 'sex',
+          formatter(row, column, cellValue, index) {
+            // 查看控制台得到该函数的所有参数
+            // console.log(row, column, cellValue, index)
+            return {
+              FEMALE: '女',
+              MALE: '男'
+            }[cellValue]
+          }
+        },
         {
           label: '操作',
           render(h, { row, index }) {
@@ -66,23 +78,20 @@ export default {
               },
               '查看'
             )
-            const del = h(
-              'el-button',
-              {
-                props: {
-                  type: 'danger',
-                  size: 'mini',
-                  round: true,
-                  icon: 'el-icon-delete'
-                },
-                on: {
-                  click: () => {
-                    alert(`你删除了${row.name}`)
-                    vm.table.data.splice(index, 1)
-                  }
+            const del = h('el-button', {
+              props: {
+                type: 'danger',
+                size: 'mini',
+                round: true,
+                icon: 'el-icon-delete'
+              },
+              on: {
+                click: () => {
+                  alert(`你删除了${row.name}`)
+                  vm.table.data.splice(index, 1)
                 }
               }
-            )
+            })
             return h('div', [view, del])
           }
         }
@@ -93,6 +102,76 @@ export default {
         startDate: '',
         endDate: '',
         name: ''
+      }
+    },
+
+    chart: {
+      // 此处的option是初始化, 后面拉取到数据只需 改变option的值即可 方式在mounted中查看
+      option: {
+        // x轴
+        xAxis: {
+          // 如果x轴是动态的可以先不写
+          data: ['1月', '2月', '3月', '4月'],
+          // 刻度
+          axisTick: {
+            show: false
+          },
+          // 轴线
+          axisLine: {
+            show: false
+          }
+        },
+
+        // y轴
+        yAxis: {
+          axisLine: {
+            show: false
+          },
+          axisTick: {
+            show: false
+          },
+          axisLabel: {
+            textStyle: {
+              color: '#999'
+            }
+          },
+          splitLine: {
+            show: false
+          }
+        },
+
+        // 缩放
+        dataZoom: [{ type: 'slider' }],
+
+        // 列表可设置列表类型
+        series: [
+          {
+            type: 'bar',
+            itemStyle: {
+              color: {
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  {
+                    offset: 0,
+                    color: '#83bff6' // 0% 处的颜色
+                  },
+                  {
+                    offset: 1,
+                    color: '#188df0' // 100% 处的颜色
+                  }
+                ],
+                globalCoord: false // 缺省为 false
+              },
+              barBorderRadius: [20, 20, 0, 0]
+            },
+            // 通过setOption去设置
+            data: [200, 200, 200, 150]
+          }
+        ]
       }
     }
   }),
@@ -129,6 +208,19 @@ export default {
     console.log(tableInstance, pageInstance)
     // 在真实环境下测试获取数据
     // this.fetchTableData()
+
+    // 改变图表配置, 此操作在获取后端返回值之后设置, 3秒后查看页面结果
+    setTimeout(() => {
+      // 这是一个定时器方法,用来模拟异步请求
+      this.chart.option = {
+        xAxis: {
+          data: ['1月', '2月', '3月', '4月', '5月', '6月']
+        },
+        series: {
+          data: [100, 120, 220, 150, 200, 190]
+        }
+      }
+    }, 3000)
   }
 }
 </script>
