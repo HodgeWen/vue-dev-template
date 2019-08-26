@@ -35,7 +35,7 @@ export default {
     // 1. 模板上需要的数据务必声明好, 好处在于可以知道此数据的类型, 以及避免一些错误
     // 2. 一个组件需要维护大量的状态时, 建议将数据对象分组, 最好是与模板对应
     table: {
-      total: 0, // 在请求到数据后设置
+      total: 100, // 在请求到数据后设置
 
       // 表格数据，实际过程中应给个空的数组
       data: [
@@ -194,27 +194,28 @@ export default {
   methods: {
     // 拉取分页数据
     async fetchTableData(pagination) {
+      console.log(pagination)
       // 执行请求操作
-      const res = await this.$axios
-        .get('/something/page', {
-          params: {
-            ...this.query,
-            ...pagination
-          }
-        })
-        .catch(err => {
-          // 处理错误, 弹出提示或者存入日志表
-          alert(err)
-          // ...
-          // 此处尽量返回一个null
-          return null
-        })
+      // const res = await this.$axios
+      //   .get('/something/page', {
+      //     params: {
+      //       ...this.query,
+      //       ...pagination
+      //     }
+      //   })
+      //   .catch(err => {
+      //     // 处理错误, 弹出提示或者存入日志表
+      //     alert(err)
+      //     // ...
+      //     // 此处尽量返回一个null
+      //     return null
+      //   })
 
-      // 执行赋值操作
-      if (!res) return
-      const { table } = this
-      table.data = res.data
-      table.total = res.total
+      // // 执行赋值操作
+      // if (!res) return
+      // const { table } = this
+      // table.data = res.data
+      // table.total = res.total
     },
 
     // 拉取图表数据
