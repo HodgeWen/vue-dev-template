@@ -111,6 +111,10 @@ export default {
     chart: {
       // 此处的option是初始化, 后面拉取到数据只需 改变option的值即可 方式在mounted中查看
       option: {
+        // 图例
+        legend: {
+          show: true
+        },
         // x轴
         xAxis: {
           // 如果x轴是动态的可以先不写
@@ -149,6 +153,7 @@ export default {
         // 列表可设置列表类型
         series: [
           {
+            name: '数量',
             type: 'bar',
             itemStyle: {
               color: {
