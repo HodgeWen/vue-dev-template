@@ -11,6 +11,9 @@
     <!-- 表格 end -->
 
     <!-- 图表 start -->
+    <!-- 可以传入class自定义容器宽高 -->
+    <!-- 加切换按钮可以在外面套一层标签 -->
+    <!-- 关于echarts的详细用法请查看echarts的官网, 主要查看配置项那个教程 -->
     <v-chart :option="chart.option" />
     <!-- 图表 end -->
   </div>
