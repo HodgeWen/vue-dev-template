@@ -129,6 +129,10 @@ export default {
           }
         },
 
+        tooltip: {
+          show: true
+        },
+
         // y轴
         yAxis: {
           axisLine: {
@@ -155,6 +159,10 @@ export default {
           {
             name: '数量',
             type: 'bar',
+            label: {
+              show: true,
+              position: 'top'
+            },
             itemStyle: {
               color: {
                 type: 'linear',
@@ -207,6 +215,30 @@ export default {
       const { table } = this
       table.data = res.data
       table.total = res.total
+    },
+
+    // 拉取图表数据
+    async fetchChartData() {
+      // 模拟
+      this.$axios.get('/chart/data', {
+        params: {}
+      }).then(res => {
+        // 保证传入的是两个数组. 否则会出错
+        console.log(res)
+        // this.setOption(res.data.xData, res.data.yData)
+      })
+    },
+
+    // 设置参数
+    setOption (xData, seriesData) {
+      this.chart.option = {
+        xAxis: {
+          data: xData || []
+        },
+        series: {
+          data: seriesData || []
+        }
+      }
     }
   },
 
@@ -217,18 +249,14 @@ export default {
     // 在真实环境下测试获取数据
     // this.fetchTableData()
 
-    // 改变图表配置, 此操作在获取后端返回值之后设置, 3秒后查看页面结果
+    // 改变图表配置, 此操作在获取后端返回值之后设置, 2秒后查看页面结果
+    // 这是一个定时器方法,用来模拟异步请求
     setTimeout(() => {
-      // 这是一个定时器方法,用来模拟异步请求
-      this.chart.option = {
-        xAxis: {
-          data: ['1月', '2月', '3月', '4月', '5月', '6月']
-        },
-        series: {
-          data: [100, 120, 220, 150, 200, 190]
-        }
-      }
-    }, 3000)
+      this.setOption(
+        ['1月', '2月', '3月', '4月', '5月', '6月'],
+        [100, 120, 220, 150, 200, 190]
+      )
+    }, 2000)
   }
 }
 </script>
