@@ -2,6 +2,7 @@
   <div class="layout-container">
     <!-- 表格 start -->
     <v-table
+      no-page
       ref="table"
       :data="table.data"
       :columns="table.columns"
