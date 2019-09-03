@@ -2,11 +2,11 @@
   <div class="layout-container">
     <!-- 表格 start -->
     <v-table
-      ref="table"
-      :data="table.data"
       :columns="table.columns"
+      :data="table.data"
       :total="table.total"
       @fetch-data="fetchTableData"
+      ref="table"
     />
     <!-- 表格 end -->
 
@@ -16,6 +16,18 @@
     <!-- 关于echarts的详细用法请查看echarts的官网, 主要查看配置项那个教程 -->
     <v-chart :option="chart.option" />
     <!-- 图表 end -->
+
+    <el-button @click="modal.show = true">打印弹框</el-button>
+    <el-button @click="$print($refs.table)">打印表格</el-button>
+    <el-dialog :visible.sync="modal.show" title="提示">
+      <section>
+        <h1>测试</h1>
+        <h1>测试</h1>
+        <h1>测试</h1>
+        <h1>测试</h1>
+      </section>
+      <el-button @click="print">打印</el-button>
+    </el-dialog>
   </div>
 </template>
 
@@ -189,6 +201,10 @@ export default {
           }
         ]
       }
+    },
+
+    modal: {
+      show: false
     }
   }),
   methods: {
@@ -221,17 +237,24 @@ export default {
     // 拉取图表数据
     async fetchChartData() {
       // 模拟
-      this.$axios.get('/chart/data', {
-        params: {}
-      }).then(res => {
-        // 保证传入的是两个数组. 否则会出错
-        console.log(res)
-        // this.setOption(res.data.xData, res.data.yData)
-      })
+      this.$axios
+        .get('/chart/data', {
+          params: {}
+        })
+        .then(res => {
+          // 保证传入的是两个数组. 否则会出错
+          console.log(res)
+          // this.setOption(res.data.xData, res.data.yData)
+        })
+    },
+
+    // 打印
+    print() {
+      this.$print(this.$refs.print)
     },
 
     // 设置参数
-    setOption (xData, seriesData) {
+    setOption(xData, seriesData) {
       this.chart.option = {
         xAxis: {
           data: xData || []
