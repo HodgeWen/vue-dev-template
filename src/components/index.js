@@ -1,25 +1,17 @@
-// iview 按需引入的组件
-// import {
-//   Button, Table, Input, Form,
-//   Select, Option, Upload
-// } from 'iview'
-
-// const components = {
-//   'i-button': Button, 'i-table': Table, 'i-input': Input, 'i-form': Form,
-//   'i-select': Select, 'i-option': Option, Upload
-// }
+// 为element按需引入的组件
+import { Button, Table, TableColumn, Input, Form, Select, Option, Upload, pagination } from 'element-ui'
 
 // 自定义组件
 import VTable from './Table'
 
-const customComponents = [
-  VTable
-]
+const components = [Button, Table, TableColumn, Input, Form, Select, Option, Upload, pagination]
 
-export default function (Vue) {
-  // for (const key in components) {
-  //   Vue.component(key, components[key])
-  // }
+const customComponents = [VTable]
+
+export default function(Vue) {
+  components.forEach(component => {
+    Vue.component(component.name, component)
+  })
 
   customComponents.forEach(component => {
     Vue.component(component.name, component)

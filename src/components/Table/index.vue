@@ -4,11 +4,9 @@
     <el-table :data="data" v-bind="$attrs" v-on="$listeners">
       <template v-for="(column, index) of columns">
         <el-table-column v-if="column.render" :key="index" v-bind="column">
-          <RenderItem
-            slot-scope="{ row, $index }"
-            :render="column.render"
-            :ctx="{ row, index: $index }"
-          />
+          <template v-slot="{ row, $index }">
+            <RenderItem :render="column.render" :ctx="{ row, index: $index }" />
+          </template>
         </el-table-column>
         <el-table-column v-else :key="index" v-bind="column" />
       </template>
@@ -91,14 +89,14 @@ export default {
 
   methods: {
     // 分页尺寸改变
-    onSizeChange (size) {
+    onSizeChange(size) {
       const { query } = this
       query.size = size
       this.$emit('fetch-data', query)
     },
 
     // 分页索引改变
-    onPageChange (page) {
+    onPageChange(page) {
       const { query } = this
       query.page = page - 1
       this.$emit('fetch-data', query)

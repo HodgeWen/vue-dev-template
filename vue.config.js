@@ -26,18 +26,20 @@ module.exports = {
 
   pluginOptions: {
     'style-resources-loader': {
-      preProcessor: 'less',
-      patterns: [ path.resolve(__dirname, './src/style/mixins.less') ]
+      preProcessor: 'scss',
+      patterns: [ 
+        path.resolve(__dirname, './src/style/mixins.scss')
+      ]
     }
   },
 
-  css: {
-    loaderOptions: {
-      less: {
-        javascriptEnabled: true
-      }
-    }
-  },
+  // css: {
+  //   loaderOptions: {
+  //     less: {
+  //       javascriptEnabled: true
+  //     }
+  //   }
+  // },
 
   // 生产环境不生成.map文件
   productionSourceMap: false,
