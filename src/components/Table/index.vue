@@ -17,6 +17,7 @@
 
     <!-- 分页 start -->
     <el-pagination
+      v-if="!noPage"
       @size-change="onSizeChange"
       @current-change="onPageChange"
       :current-page="query.page + 1"
@@ -76,7 +77,9 @@ export default {
     layout: {
       type: String,
       default: 'total, sizes, prev, pager, next, jumper'
-    }
+    },
+
+    noPage: Boolean
   },
 
   data: vm => ({
