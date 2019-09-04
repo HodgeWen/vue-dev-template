@@ -119,7 +119,6 @@ export default {
   },
 
   mounted () {
-    console.log(this)
     this.$nextTick(() => {
       this.tableHeight = `calc(100% - ${this.$refs.tools.offsetHeight + 40}px)`
     })
