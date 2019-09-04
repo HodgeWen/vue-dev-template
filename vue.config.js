@@ -45,6 +45,7 @@ module.exports = {
   productionSourceMap: false,
 
   devServer: {
+    port: 80,
     hot: true,
     inline: true,
     stats: {

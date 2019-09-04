@@ -12,7 +12,7 @@ export default new Router({
       name: 'layout',
       component: () => import('./views/layout'),
       children: [
-        { name: 'table', path: 'table', component: () => import('./examples/Table') },
+        { name: 'table', path: 'table', alias: '/', component: () => import('./examples/Table') },
         { name: 'chart', path: 'chart', component: () => import('./examples/Chart') }
       ]
     }
