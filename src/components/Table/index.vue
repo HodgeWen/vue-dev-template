@@ -11,7 +11,7 @@
       v-on="$listeners"
     >
       <template v-for="(column, index) of columns">
-        <el-table-column v-if="column.render" :key="index" v-bind="column">
+        <el-table-column v-if="column.render" :key="index" v-bind="column" :align="column.align || 'center'">
           <template v-slot="{ row, $index }">
             <RenderItem :render="column.render" :ctx="{ row, index: $index }" />
           </template>
