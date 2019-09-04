@@ -1,6 +1,6 @@
 <template>
   <div class="v-table" :class="{ 'v-table--fix-header': headerFix }">
-    <section class="w-table__tools" ref="tools" v-if="$scopedSlots.tools">
+    <section class="v-table__tools">
       <slot name="tools" />
     </section>
     <!-- 表格主体 start -->
@@ -99,7 +99,7 @@ export default {
       size: 10
     },
 
-    tableHeight: 'calc(100% - 40px)'
+    tableHeight: 'calc(100% - 90px)'
   }),
 
   methods: {
@@ -116,12 +116,6 @@ export default {
       query.page = page - 1
       this.$emit('fetch-data', query)
     }
-  },
-
-  mounted () {
-    this.$nextTick(() => {
-      this.tableHeight = `calc(100% - ${this.$refs.tools.offsetHeight + 40}px)`
-    })
   }
 }
 </script>

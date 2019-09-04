@@ -5,8 +5,13 @@
 
 .v-table {
   height: 100%;
-
+  position: relative;
   &--fix-header {
     height: 100%;
+  }
+
+  &__tools {
+    height: 50px;
+    padding: 5px 0;
   }
 }

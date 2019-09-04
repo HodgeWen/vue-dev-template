@@ -8,7 +8,9 @@
         :key="index"
       >{{name}}</el-menu-item>
     </el-menu>
-    <router-view class="main" />
+    <transition name="el-fade-in" mode="out-in">
+      <router-view class="main" />
+    </transition>
   </div>
 </template>
 
