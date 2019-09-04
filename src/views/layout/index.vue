@@ -1,16 +1,35 @@
 <template>
   <div class="container">
-    <aside class="aside">
-      <router-link :to="{ name: 'table' }">Table</router-link>
-    </aside>
-    <main class="main">
-      <router-view />
-    </main>
+    <el-menu class="aside" :default-active="routeName">
+      <el-menu-item
+        @click="navTo(route)"
+        v-for="({ route, name }, index) of menus"
+        :index="route"
+        :key="index"
+      >{{name}}</el-menu-item>
+    </el-menu>
+    <router-view class="main" />
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data: vm => ({
+    menus: [{ route: 'table', name: '表格 Table' }, { route: 'chart', name: '图表 Chart' }]
+  }),
+
+  computed: {
+    routeName() {
+      return this.$route.name
+    }
+  },
+
+  methods: {
+    navTo(name) {
+      name !== this.routeName && this.$router.push({ name })
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -22,7 +41,8 @@ $aside-width: 240px;
   min-width: 1300px;
 }
 
-.aside, .main {
+.aside,
+.main {
   height: 100%;
 }
 
@@ -33,5 +53,6 @@ $aside-width: 240px;
 .main {
   width: calc(100% - #{$aside-width});
   padding: 8px;
+  overflow: auto;
 }
 </style>

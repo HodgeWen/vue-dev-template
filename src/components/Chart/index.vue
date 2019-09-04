@@ -4,7 +4,7 @@
 
 <script>
 import echarts from 'echarts'
-import './index.less'
+import './index.scss'
 export default {
   name: 'VChart',
 

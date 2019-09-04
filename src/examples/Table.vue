@@ -1,11 +1,21 @@
 <template>
-  <v-table
-    :columns="table.columns"
-    :total="table.total"
-    @fetch-data="fetchTableData"
-    :data="table.data"
-    ref="table"
-  />
+  <div>
+    <v-table
+      header-fix
+      stripe
+      size="small"
+      :columns="table.columns"
+      :total="table.total"
+      @fetch-data="fetchTableData"
+      :data="table.data"
+      ref="table"
+    >
+      <template #tools>
+        <el-date-picker v-model="table.date" type="date" placeholder="选择日期" />
+        <el-button style="margin-left: 6px">查询</el-button>
+      </template>
+    </v-table>
+  </div>
 </template>
 
 <script>
@@ -15,13 +25,9 @@ export default {
       total: 100, // 在请求到数据后设置
 
       // 表格数据，实际过程中应给个空的数组
-      data: [
-        { name: '张三', age: 20, sex: 'MALE' },
-        { name: '李四', age: 22, sex: 'FEMALE' },
-        { name: '王五', age: 20, sex: 'FEMALE' },
-        { name: '钱六', age: 20, sex: 'MALE' },
-        { name: '赵七', age: 20, sex: 'MALE' }
-      ],
+      data: Array(20)
+        .fill()
+        .map(item => ({ name: '某某某', age: 20, sex: 'MALE' })),
 
       columns: [
         { type: 'index' },
@@ -82,7 +88,9 @@ export default {
         startDate: '',
         endDate: '',
         name: ''
-      }
+      },
+
+      date: ''
     }
   }),
 

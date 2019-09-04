@@ -1,7 +1,15 @@
 <template>
-  <div class="v-table">
+  <div class="v-table" :class="{ 'v-table--fix-header': headerFix }">
+    <section class="w-table__tools" ref="tools" v-if="$scopedSlots.tools">
+      <slot name="tools" />
+    </section>
     <!-- 表格主体 start -->
-    <el-table :data="data" v-bind="$attrs" v-on="$listeners">
+    <el-table
+      :data="data"
+      :height="headerFix ? tableHeight : null"
+      v-bind="$attrs"
+      v-on="$listeners"
+    >
       <template v-for="(column, index) of columns">
         <el-table-column v-if="column.render" :key="index" v-bind="column">
           <template v-slot="{ row, $index }">
@@ -29,9 +37,10 @@
 </template>
 
 <script>
-import './index.less'
+import './index.scss'
 export default {
   name: 'VTable',
+
   components: {
     RenderItem: {
       props: {
@@ -50,6 +59,8 @@ export default {
       }
     }
   },
+
+  inheritAttrs: false,
 
   props: {
     data: {
@@ -77,14 +88,18 @@ export default {
       default: 'total, sizes, prev, pager, next, jumper'
     },
 
-    noPage: Boolean
+    noPage: Boolean,
+
+    headerFix: Boolean
   },
 
   data: vm => ({
     query: {
       page: 0,
       size: 10
-    }
+    },
+
+    tableHeight: 'calc(100% - 40px)'
   }),
 
   methods: {
@@ -101,9 +116,13 @@ export default {
       query.page = page - 1
       this.$emit('fetch-data', query)
     }
+  },
+
+  mounted () {
+    console.log(this)
+    this.$nextTick(() => {
+      this.tableHeight = `calc(100% - ${this.$refs.tools.offsetHeight + 40}px)`
+    })
   }
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

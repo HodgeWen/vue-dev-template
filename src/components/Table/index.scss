@@ -1,0 +1,12 @@
+.el-pagination {
+  text-align: right;
+  padding: 6px;
+}
+
+.v-table {
+  height: 100%;
+
+  &--fix-header {
+    height: 100%;
+  }
+}
