@@ -27,11 +27,34 @@ export default {
       // 表格数据，实际过程中应给个空的数组
       data: Array(20)
         .fill()
-        .map(item => ({ name: '某某某', age: 20, sex: 'MALE' })),
+        .map(item => ({
+          name: '某某某',
+          age: 20,
+          sex: 'MALE',
+          award: [
+            { date: '2019-09-01', title: 'xxs比赛第一名' },
+            { date: '2019-02-01', title: 'xxs比赛第三名' }
+          ]
+        })),
 
       columns: [
         { type: 'index' },
         { type: 'selection' },
+        {
+          type: 'expand',
+          render(h, { row }) {
+            return h('v-table', {
+              props: {
+                'no-page': true,
+                columns: [
+                  { label: '获奖时间', prop: 'date' },
+                  { label: '奖项', prop: 'title' }
+                ],
+                data: row.award
+              }
+            })
+          }
+        },
         { label: '姓名', prop: 'name' },
         { label: '年龄', prop: 'age' },
         {

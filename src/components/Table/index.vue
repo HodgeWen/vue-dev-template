@@ -1,6 +1,6 @@
 <template>
   <div class="v-table" :class="{ 'v-table--fix-header': headerFix }">
-    <section class="v-table__tools">
+    <section class="v-table__tools" v-if="headerFix">
       <slot name="tools" />
     </section>
     <!-- 表格主体 start -->
