@@ -42,8 +42,8 @@ export default {
         { type: 'selection' },
         {
           type: 'expand',
-          render(h, { row }) {
-            return h('v-table', {
+          render(h, { row, index }) {
+            const table = h('v-table', {
               props: {
                 'no-page': true,
                 columns: [
@@ -53,6 +53,23 @@ export default {
                 data: row.award
               }
             })
+
+            const exportButton = h('el-button', {
+              style: {
+                float: 'right',
+                marginTop: '8px'
+              },
+              props: {
+                type: 'primary'
+              },
+              on: {
+                click: () => alert(`点击了第 ${index + 1} 条数据中的导出excel按钮`)
+              }
+            }, '导出excel')
+
+            return h('div', [
+              table, exportButton
+            ])
           }
         },
         { label: '姓名', prop: 'name' },
