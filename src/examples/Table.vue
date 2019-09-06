@@ -56,7 +56,6 @@ export default {
 
             const exportButton = h('el-button', {
               style: {
-                float: 'right',
                 marginTop: '8px'
               },
               props: {
@@ -67,7 +66,11 @@ export default {
               }
             }, '导出excel')
 
-            return h('div', [
+            return h('div', {
+              style: {
+                textAlign: 'right'
+              }
+            }, [
               table, exportButton
             ])
           }
