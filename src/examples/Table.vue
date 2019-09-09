@@ -31,6 +31,7 @@ export default {
           name: '某某某',
           age: 20,
           sex: 'MALE',
+          test: 'test',
           award: [
             { date: '2019-09-01', title: 'xxs比赛第一名' },
             { date: '2019-02-01', title: 'xxs比赛第三名' }
@@ -102,7 +103,7 @@ export default {
                   round: true
                 },
                 on: {
-                  click: () => alert(`你查看了${row.name}`)
+                  click: () => console.log(row === vm.table.data[index])
                 }
               },
               '查看'
