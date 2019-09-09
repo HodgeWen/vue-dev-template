@@ -77,7 +77,13 @@ export default {
           }
         },
         { label: '姓名', prop: 'name' },
-        { label: '年龄', prop: 'age' },
+        { label: '年龄', render (h, { row }) {
+          return h('span', {
+            on: {
+              click: () => alert(`点击了年龄${row.age}`)
+            }
+          }, row.age)
+        } },
         {
           label: '性别',
           prop: 'sex',
