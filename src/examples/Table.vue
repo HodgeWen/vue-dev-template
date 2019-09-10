@@ -21,15 +21,16 @@
 <script>
 export default {
   data: vm => ({
+    selectedAges: [20, 21, 22, 23, 24, 27],
     table: {
       total: 100, // 在请求到数据后设置
 
       // 表格数据，实际过程中应给个空的数组
       data: Array(20)
         .fill()
-        .map(item => ({
+        .map((item, index) => ({
           name: '某某某',
-          age: 20,
+          age: 20 + index,
           sex: 'MALE',
           test: 'test',
           award: [
@@ -40,7 +41,9 @@ export default {
 
       columns: [
         { type: 'index' },
-        { type: 'selection' },
+        { type: 'selection', selectable (row, index) {
+          return !vm.selectedAges.includes(row.age)
+        } },
         {
           type: 'expand',
           render(h, { row, index }) {
