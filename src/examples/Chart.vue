@@ -1,6 +1,6 @@
 <template>
   <main>
-    <v-chart style="height: 100%" :option="option" />
+    <v-chart ref="chart" style="height: 100%" :option="option" />
   </main>
 </template>
 
@@ -12,38 +12,42 @@ export default {
 
   data: vm => ({
     option: {
-      title: {
-        text: '极坐标双数值轴'
-      },
-      legend: {
-        data: ['线']
-      },
-      polar: {
-        center: ['50%', '54%']
-      },
+      color: ['#3398DB'],
       tooltip: {
         trigger: 'axis',
         axisPointer: {
-          type: 'cross'
+          // 坐标轴指示器，坐标轴触发有效
+          type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
         }
       },
-      angleAxis: {
-        type: 'value',
-        startAngle: 0
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
       },
-      radiusAxis: {
-        min: 0
-      },
-      series: [
+      xAxis: [
         {
-          coordinateSystem: 'polar',
-          name: '线',
-          type: 'line',
-          showSymbol: false,
-          data: []
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          axisTick: {
+            alignWithLabel: true
+          }
         }
       ],
-      animationDuration: 2000
+      yAxis: [
+        {
+          type: 'value'
+        }
+      ],
+      series: [
+        {
+          name: '直接访问',
+          type: 'bar',
+          barWidth: '60%',
+          data: []
+        }
+      ]
     }
   }),
 
@@ -52,13 +56,7 @@ export default {
       this.option = {
         series: [
           {
-            data: Array(360)
-              .fill()
-              .map((item, index) => {
-                const t = (index / 180) * Math.PI
-                const r = Math.sin(2 * t) * Math.cos(2 * t)
-                return [r, t]
-              })
+            data: [10, 52, 200, 334, 390, 330, 220]
           }
         ]
       }
@@ -67,6 +65,15 @@ export default {
 
   mounted() {
     this.setData()
+    this.$refs.chart.chart.on('click', {
+      seriesIndex: 0
+    }, (e) => {
+      window.alert(e.data)
+    })
+  },
+
+  beforeDestroy () {
+    this.$refs.chart.chart.off('click')
   }
 }
 </script>
