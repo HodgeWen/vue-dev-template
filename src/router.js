@@ -13,7 +13,8 @@ export default new Router({
       component: () => import('./views/layout'),
       children: [
         { name: 'table', path: 'table', alias: '/', component: () => import('./examples/Table') },
-        { name: 'chart', path: 'chart', component: () => import('./examples/Chart') }
+        { name: 'chart', path: 'chart', component: () => import('./examples/Chart') },
+        { name: 'doubleInput', path: 'doubleInput', component: () => import('./examples/Input') }
       ]
     }
   ]

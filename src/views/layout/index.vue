@@ -17,7 +17,11 @@
 <script>
 export default {
   data: vm => ({
-    menus: [{ route: 'table', name: '表格 Table' }, { route: 'chart', name: '图表 Chart' }]
+    menus: [
+      { route: 'table', name: '表格 Table' },
+      { route: 'chart', name: '图表 Chart' },
+      { route: 'doubleInput', name: '双输入框 DoubleInput' }
+    ]
   }),
 
   computed: {
