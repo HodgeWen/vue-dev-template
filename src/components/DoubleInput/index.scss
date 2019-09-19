@@ -39,7 +39,7 @@ $join-width: 24px;
     border-color: #409eff;
   }
 
-  @each $class, $size in (medium, $medium-size), (small, $medium-size), (mini, $medium-size) {
+  @each $class, $size in (medium, $medium-size), (small, $small-size), (mini, $mini-size) {
     &--#{$class} {
       input {
         height: $size;
