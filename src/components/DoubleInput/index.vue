@@ -72,7 +72,7 @@ export default {
       return ret
     },
 
-    classes () {
+    classes() {
       const ret = []
       this.didFocus && ret.push('v-double-input--focus')
       this.size && ret.push(`v-double-input--${this.size}`)

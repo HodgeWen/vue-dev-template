@@ -1,11 +1,10 @@
-$medium-size: 36px;
-$small-size: 32px;
-$mini-size: 28px;
+$medium-size: 34px;
+$small-size: 30px;
+$mini-size: 26px;
 $join-width: 24px;
 
 .v-double-input {
   width: 240px;
-  background-color: #fff;
   border-radius: 4px;
   border: 1px solid #dcdfe6;
   color: #606266;
@@ -13,7 +12,8 @@ $join-width: 24px;
   transition: border-color .2s cubic-bezier(.645,.045,.355,1);
   padding: 0 7px;
   outline: none;
-
+  font-family: inherit;
+  font-size: 14px;
   &:hover {
     border-color: #c0c4cc;
   }
@@ -22,8 +22,8 @@ $join-width: 24px;
     border: none;
     -webkit-appearance: none;
     outline: none;
-    height: 40px;
-    line-height: 40px;
+    height: 38px;
+    line-height: 38px;
     padding: 0 7px;
     width: calc((100% - #{$join-width}) / 2);
   }
