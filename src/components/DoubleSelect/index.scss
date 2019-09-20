@@ -44,6 +44,10 @@ $join-width: 24px;
         height: $size;
         line-height: $size;
       }
+
+      .el-input__icon {
+        line-height: $size;
+      }
     }
   }
 }

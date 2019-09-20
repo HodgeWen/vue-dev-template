@@ -2,8 +2,8 @@
   <div :style="styles" class="v-double-select" :class="classes">
     <el-select
       :size="size"
-      @focus="onFocus"
-      @blur="onBlur"
+      @focus="onFocus(0)"
+      @blur="onBlur(0)"
       @change="onChange(0, $event)"
       :clearable="clearable"
       :placeholder="placeholders[0]"
@@ -19,8 +19,8 @@
     <span class="v-double-select__join">{{separator}}</span>
     <el-select
       :size="size"
-      @focus="onFocus"
-      @blur="onBlur"
+      @focus="onFocus(1)"
+      @blur="onBlur(1)"
       @change="onChange(1, $event)"
       :clearable="clearable"
       :placeholder="placeholders[1]"
@@ -44,7 +44,8 @@ export default {
   inheritAttrs: false,
 
   data: vm => ({
-    didFocus: false
+    didFirstSelectFocus: false,
+    didSecondSelectFocus: false
   }),
 
   props: {
@@ -104,7 +105,7 @@ export default {
 
     classes() {
       const ret = []
-      this.didFocus && ret.push('v-double-select--focus')
+      ;(this.didFirstSelectFocus || this.didSecondSelectFocus) && ret.push('v-double-select--focus')
       this.size && ret.push(`v-double-select--${this.size}`)
       return ret.join(' ')
     }
@@ -117,12 +118,12 @@ export default {
       this.$emit('change', ret)
     },
 
-    onFocus() {
-      this.$nextTick(() => (this.didFocus = true))
+    onFocus(index) {
+      index === 0 ? (this.didFirstSelectFocus = true) : (this.didSecondSelectFocus = true)
     },
 
-    onBlur() {
-      this.didFocus = false
+    onBlur(index) {
+      index === 0 ? (this.didFirstSelectFocus = false) : (this.didSecondSelectFocus = false)
     }
   },
 
