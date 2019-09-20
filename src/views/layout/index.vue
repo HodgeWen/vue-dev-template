@@ -20,7 +20,8 @@ export default {
     menus: [
       { route: 'table', name: '表格 Table' },
       { route: 'chart', name: '图表 Chart' },
-      { route: 'doubleInput', name: '双输入框 DoubleInput' }
+      { route: 'doubleInput', name: '双输入框 DoubleInput' },
+      { route: 'doubleSelect', name: '双选择器 DoubleSelect' }
     ]
   }),
 

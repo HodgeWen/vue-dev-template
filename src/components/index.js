@@ -17,6 +17,7 @@ import {
 // 自定义组件
 import VTable from './Table'
 import VInput from './DoubleInput'
+import VSelect from './DoubleSelect'
 
 const components = [
   Button,
@@ -33,7 +34,7 @@ const components = [
   DatePicker
 ]
 
-const customComponents = [VTable, VInput]
+const customComponents = [VTable, VInput, VSelect]
 
 export default function(Vue) {
   components.forEach(component => {

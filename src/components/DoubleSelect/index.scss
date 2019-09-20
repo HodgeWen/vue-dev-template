@@ -1,6 +1,6 @@
 $join-width: 24px;
 
-.v-double-input {
+.v-double-select {
   width: 240px;
   border-radius: 4px;
   border: 1px solid #dcdfe6;
@@ -15,7 +15,7 @@ $join-width: 24px;
     border-color: #c0c4cc;
   }
 
-  input {
+  .el-select {
     border: none;
     -webkit-appearance: none;
     outline: none;
@@ -25,6 +25,12 @@ $join-width: 24px;
     width: calc((100% - #{$join-width}) / 2);
   }
 
+  .el-input__inner {
+    border: none;
+    height: 38px;
+    line-height: 38px;
+  }
+
   &__join {
     display: inline-block;
     width: $join-width;
@@ -32,16 +38,16 @@ $join-width: 24px;
     text-align: center;
   }
 
-  &--focus.v-double-input {
+  &--focus.v-double-select {
     border-color: #409eff;
   }
 
-  @each $class, $size in (medium, $medium-size), (small, $small-size), (mini, $mini-size) {
-    &--#{$class} {
-      input {
-        height: $size;
-        line-height: $size;
-      }
-    }
-  }
+//   @each $class, $size in (medium, $medium-size), (small, $small-size), (mini, $mini-size) {
+//     &--#{$class} {
+//       input {
+//         height: $size;
+//         line-height: $size;
+//       }
+//     }
+//   }
 }
