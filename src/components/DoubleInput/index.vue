@@ -61,7 +61,9 @@ export default {
     separator: {
       type: String,
       default: '~'
-    }
+    },
+
+    clearable: Boolean
   },
 
   computed: {
