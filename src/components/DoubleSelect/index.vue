@@ -81,7 +81,6 @@ export default {
       default: () => ['', '']
     },
 
-
     placeholders: {
       type: Array,
       default: () => ['from', 'to']
@@ -119,10 +118,10 @@ export default {
     },
 
     onFocus() {
-      this.$nextTick(() => this.didFocus = true)
+      this.$nextTick(() => (this.didFocus = true))
     },
 
-    onBlur () {
+    onBlur() {
       this.didFocus = false
     }
   },

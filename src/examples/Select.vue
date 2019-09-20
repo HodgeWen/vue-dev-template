@@ -16,18 +16,11 @@ export default {
   data: vm => ({
     value: [],
 
-
     // 如果key值不是label和value 则可以在模板中定义
     // :lable-key="xxx" :value-key="xxx"
-    firstOption: [
-      { label: 'a', value: '1' },
-      { label: 'b', value: '2' }
-    ],
+    firstOption: [{ label: 'a', value: '1' }, { label: 'b', value: '2' }],
 
-    secondOption: [
-      { label: 'a', value: '1' },
-      { label: 'b', value: '2' }
-    ]
+    secondOption: [{ label: 'a', value: '1' }, { label: 'b', value: '2' }]
   })
 }
 </script>
