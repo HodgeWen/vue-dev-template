@@ -7,7 +7,6 @@ $join-width: 24px;
   color: #606266;
   display: inline-block;
   transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-  padding: 0 7px;
   outline: none;
   font-family: inherit;
   font-size: 14px;
@@ -19,9 +18,6 @@ $join-width: 24px;
     border: none;
     -webkit-appearance: none;
     outline: none;
-    height: 38px;
-    line-height: 38px;
-    padding: 0 7px;
     width: calc((100% - #{$join-width}) / 2);
   }
 
@@ -42,12 +38,12 @@ $join-width: 24px;
     border-color: #409eff;
   }
 
-//   @each $class, $size in (medium, $medium-size), (small, $small-size), (mini, $mini-size) {
-//     &--#{$class} {
-//       input {
-//         height: $size;
-//         line-height: $size;
-//       }
-//     }
-//   }
+  @each $class, $size in (medium, $medium-size), (small, $small-size), (mini, $mini-size) {
+    &--#{$class} {
+      .el-input__inner {
+        height: $size;
+        line-height: $size;
+      }
+    }
+  }
 }

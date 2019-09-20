@@ -2,6 +2,7 @@
   <div>
     <!-- 默认宽度为240px -->
     <v-double-select
+      size="small"
       :first-option="firstOption"
       :second-option="secondOption"
       clearable
