@@ -6,7 +6,7 @@ $join-width: 24px;
   border: 1px solid #dcdfe6;
   color: #606266;
   display: inline-block;
-  transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   padding: 0 7px;
   outline: none;
   font-family: inherit;
@@ -15,14 +15,28 @@ $join-width: 24px;
     border-color: #c0c4cc;
   }
 
+  &__inner {
+    width: calc((100% - #{$join-width}) / 2);
+    display: inline-block;
+    position: relative;
+
+    .first,
+    .second {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+
   input {
+    width: 100%;
     border: none;
     -webkit-appearance: none;
     outline: none;
     height: 38px;
     line-height: 38px;
-    padding: 0 7px;
-    width: calc((100% - #{$join-width}) / 2);
+    padding: 0 14px 0 7px;
   }
 
   &__join {
@@ -36,7 +50,9 @@ $join-width: 24px;
     border-color: #409eff;
   }
 
-  @each $class, $size in (medium, $medium-size), (small, $small-size), (mini, $mini-size) {
+  @each $class, $size in (medium, $medium-size), (small, $small-size),
+    (mini, $mini-size)
+  {
     &--#{$class} {
       input {
         height: $size;

@@ -1,25 +1,31 @@
 <template>
   <div :style="styles" class="v-double-input" :class="classes">
-    <input
-      @input="onInput(0, $event.target.value)"
-      @focus="didFocus = true"
-      @blur="didFocus = false"
-      hidefocus="true"
-      :value="values[0]"
-      :placeholder="placeholders[0]"
-      :type="type"
-      v-bind="$attrs"
-    />
+    <div class="v-double-input__inner">
+      <input
+        @input="onInput(0, $event.target.value)"
+        @focus="didFocus = true"
+        @blur="didFocus = false"
+        hidefocus="true"
+        :value="values[0]"
+        :placeholder="placeholders[0]"
+        :type="type"
+        v-bind="$attrs"
+      />
+      <i v-if="clearable && values[0]" @click="onClear(0)" class="el-icon-circle-close first"></i>
+    </div>
     <span class="v-double-input__join">{{separator}}</span>
-    <input
-      @input="onInput(1, $event.target.value)"
-      @focus="didFocus = true"
-      @blur="didFocus = false"
-      :value="values[1]"
-      :placeholder="placeholders[1]"
-      :type="type"
-      v-bind="$attrs"
-    />
+    <div class="v-double-input__inner">
+      <input
+        @input="onInput(1, $event.target.value)"
+        @focus="didFocus = true"
+        @blur="didFocus = false"
+        :value="values[1]"
+        :placeholder="placeholders[1]"
+        :type="type"
+        v-bind="$attrs"
+      />
+      <i v-if="clearable && values[1]" @click="onClear(1)" class="el-icon-circle-close second"></i>
+    </div>
   </div>
 </template>
 
@@ -86,6 +92,12 @@ export default {
     onInput(index, value) {
       const ret = [...this.values]
       ret[index] = value
+      this.$emit('change', ret)
+    },
+
+    onClear(index) {
+      const ret = [...this.values]
+      ret[index] = ''
       this.$emit('change', ret)
     }
   },
