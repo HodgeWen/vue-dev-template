@@ -6,8 +6,8 @@
       <Breadcrumb class="breadcrumb" separator=">">
         <!-- layout后期要换成首页的路由名称 -->
         <BreadcrumbItem
-          v-for="({ title, route }, index) of breadcrumbs"
-          :to="breadcrumbs.length - 1 !== index ? { name: route } : null"
+          v-for="({ name, title }, index) of breadcrumbs"
+          :to="breadcrumbs.length - 1 !== index ? { name } : null"
           :key="index"
         >{{title}}</BreadcrumbItem>
       </Breadcrumb>
@@ -62,22 +62,20 @@ export default {
     breadcrumbs() {
       const { meta, name } = this.$route
       const activeMap = sessionCache.get('activeMap')
-      const menus = sessionCache.get('menus')
+      const menus = sessionCache.get('menus') || []
 
-      let ret = [{ title: '首页', route: 'layout' }]
+      let ret = [{ title: '首页', name: 'layout' }]
 
       if (!activeMap || !menus || name === 'layout') return ret
 
-      let adds = []
-      const recursive = ({ name, meta }) => {
-        const { parent, title } = meta
-        adds.unshift({ title, route: name })
-        if (parent) {
-          recursive(this.$router.resolve({ name: parent }).route)
-        }
-      }
-      recursive(this.$route)
-      return ret.concat(adds)
+      // const parentName = activeMap[name].parentName
+      // if (parentName) {
+      //   ret.push({ title: activeMap[parentName].routeLabel })
+      // }
+
+      ret.push({ title: activeMap[name].routeLabel, name: activeMap[name].routeName})
+
+      return ret
     }
   },
 

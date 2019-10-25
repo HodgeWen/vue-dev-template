@@ -10,30 +10,30 @@
         text-color="#fff"
         active-text-color="#00C1DE"
       >
-        <template v-for="({ name, children, icon }) of menus">
+        <template v-for="({ routeName, routeLabel, children, icon }) of menus">
           <!-- 一级路由中有子路由且子路由不为空 -->
-          <el-submenu v-if="children && children.length" :key="name" :index="name">
+          <el-submenu v-if="children && children.length" :key="routeName" :index="routeName">
             <template #title>
               <i :class="icon"></i>
-              <span>{{$t(name)}}</span>
+              <span>{{routeLabel}}</span>
             </template>
             <el-menu-item
-              v-for="({ name: routerName }) of children"
-              :key="routerName"
-              :index="`${name}-${routerName}`"
-              @click.native="onMenuItemNativeClick(routerName)"
-            >{{$t(routerName)}}</el-menu-item>
+              v-for="({ routeName: subRouteName, routeLabel: subRouteLabel }) of children"
+              :key="subRouteName"
+              :index="`${routeName}/${subRouteName}`"
+              @click.native="onMenuItemNativeClick(subRouteName)"
+            >{{subRouteLabel}}</el-menu-item>
           </el-submenu>
 
           <!-- 一级路由中没有有子路由,则直接做跳转功能 -->
           <el-menu-item
             v-else
-            :key="name"
-            @click.native="onMenuItemNativeClick(name)"
-            :index="name"
+            :key="routeName"
+            @click.native="onMenuItemNativeClick(routeName)"
+            :index="routeName"
           >
             <i :class="icon"></i>
-            <span slot="title">{{$t(name)}}</span>
+            <span slot="title">{{routeLabel}}</span>
           </el-menu-item>
         </template>
       </el-menu>
@@ -62,14 +62,16 @@ export default {
 
   data: () => ({
     menus: [
-      { 
-        name: 'system', 
-        icon: 'setting', 
+      {
+        routeName: 'system',
+        routeLabel: '系统管理',
+        icon: 'el-icon-setting',
         children: [
-          { 
-            name: 'router-setting'
+          {
+            routeName: 'router-setting',
+            routeLabel: '路由设置'
           }
-        ] 
+        ]
       }
     ]
   }),
@@ -96,18 +98,38 @@ export default {
       route !== this.$route.name && this.$router.push({ name: route })
     },
 
-    // 生成active映射
+    // 映射
     mapActive(menus) {
       let ret = {}
-      ~(function recursive(arr, index = 0) {
-        arr.forEach((menu, i) => {
-          if (menu.children && menu.children.length) {
-            recursive(menu.children, i)
+
+      function recursive(menus, parentName = '') {
+        menus.forEach(({ children, routeName, routeLabel }) => {
+          if (children && children.length) {
+            recursive(children, routeName)
           } else {
-            ret[menu.route] = index + '-' + menu.route
+            ret[routeName] = {
+              parentName,
+              routeName,
+              routeLabel
+            }
           }
         })
-      })(menus)
+      }
+
+      recursive([
+        {
+          routeName: 'system',
+          routeLabel: '系统管理',
+          icon: 'el-icon-setting',
+          children: [
+            {
+              routeName: 'router-setting',
+              routeLabel: '路由设置'
+            }
+          ]
+        }
+      ])
+
       sessionCache.set('activeMap', ret)
     }
   },
@@ -116,11 +138,21 @@ export default {
     // 默认展开的菜单
     defaultActive() {
       const { meta, name } = this.$route
-      return (sessionCache.get('activeMap') || {})[meta.parent ? meta.parent : name]
+
+      // 获取路由映射的参数
+      const activeMap = sessionCache.get('activeMap')
+      if (!activeMap) return ''
+
+      // 当前激活的路由的归属
+      const activeRoute = activeMap[meta.parent ? meta.parent : name]
+      return activeRoute.parentName
+        ? activeRoute.parentName + '/' + activeRoute.routeName
+        : activeRoute.routeName
     }
   },
 
   mounted() {
+    this.mapActive()
     // this.fetchMenus()
   }
 }

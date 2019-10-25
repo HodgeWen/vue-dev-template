@@ -21,7 +21,7 @@
           type="primary"
           size="small"
           plain
-          @click="$router.push({ name: 'routesChild' })"
+          @click="$router.push({ name: 'router-child' })"
         >子页面</el-button>
       </template>
 
