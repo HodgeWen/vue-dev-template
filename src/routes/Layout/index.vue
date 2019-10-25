@@ -53,12 +53,13 @@ export default {
 
   mounted() {
     // 获取人员信息
-    this.fetchUserInfo()
+    // this.fetchUserInfo()
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@import './var.scss';
 $bar-width: 217px;
 .aside::v-deep {
   width: $bar-width;

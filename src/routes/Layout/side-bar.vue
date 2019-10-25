@@ -61,7 +61,18 @@ export default {
   },
 
   data: () => ({
-    menus: []
+    menus: [
+      { 
+        name: 'system', 
+        icon: 'setting', 
+        children: [
+          { 
+            name: '',
+            route: ''
+          }
+        ] 
+      }
+    ]
   }),
 
   methods: {
@@ -111,12 +122,13 @@ export default {
   },
 
   mounted() {
-    this.fetchMenus()
+    // this.fetchMenus()
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@import './var.scss';
 .logo {
   height: $header-height;
   text-align: center;

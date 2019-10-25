@@ -94,6 +94,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './var.scss';
 .header {
   height: $header-height;
   padding: 0 16px;
