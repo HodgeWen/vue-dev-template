@@ -3,40 +3,57 @@ import {
   Button,
   Table,
   TableColumn,
-  Input,
+  Pagination,
+  Scrollbar,
   Form,
+  FormItem,
+  Input,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  Popover,
+  Tag,
+  Dialog,
   Select,
   Option,
-  Upload,
-  pagination,
-  Menu,
-  MenuItem,
-  DatePicker
+  Switch,
+  transfer
 } from 'element-ui'
+
+import { Message } from 'element-ui'
 
 // 自定义组件
 import VTable from './Table'
-import VInput from './DoubleInput'
-import VSelect from './DoubleSelect'
+import VIcon from './Icon'
+import VButton from './Button'
+import ConfirmPopover from './ConfirmPopover'
+import Page from './Page'
+import VDialog from './Dialog'
 
 const components = [
   Button,
   Table,
   TableColumn,
-  Input,
+  Pagination,
+  Scrollbar,
   Form,
+  FormItem,
+  Input,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
+  Popover,
+  Tag,
+  Dialog,
   Select,
   Option,
-  Upload,
-  pagination,
-  Menu,
-  MenuItem,
-  DatePicker
+  Switch,
+  transfer
 ]
 
-const customComponents = [VTable, VInput, VSelect]
+const customComponents = [VTable, VIcon, VButton, ConfirmPopover, Page, VDialog]
 
-export default function(Vue) {
+export default function (Vue) {
   components.forEach(component => {
     Vue.component(component.name, component)
   })
@@ -44,7 +61,6 @@ export default function(Vue) {
   customComponents.forEach(component => {
     Vue.component(component.name, component)
   })
-}
 
-// 按需导出的组件
-export { default as VChart } from './Chart'
+  Vue.prototype.$msg = Message
+}

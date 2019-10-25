@@ -9,12 +9,16 @@
       "style/*": ["src/style/*"],
       "components/*": ["src/components/*"],
       "images/*": ["src/assets/images/*"],
-      "fonts/*": ["src/assets/fonts/*"]
+      "fonts/*": ["src/assets/fonts/*"],
+      "i18n/*": ["src/i18n/*"],
+      "mixins/*": ["src/mixins/*"],
+      "layout/*": ["src/routes/layout/*"],
+      "error/*": ["src/routes/error/*"],
+      "login/*": ["src/routes/login/*"],
+      "routes/*": ["src/routes/*"]
     },
     "moduleResolution": "node",
     "target": "esnext"
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"]
 }

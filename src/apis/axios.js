@@ -1,28 +1,42 @@
 import axios from 'axios'
+import errTactics from './errTactics'
 
-const createInstance = ({ option = null, before, after } = {}) => {
-  const instance = axios.create(option)
+// 创建一个axios的实例
+function create(options = {}, interceptor = {}) {
+  const instance = axios.create(options)
+
+  const { before, onOk, onErr } = interceptor
+
+  // 请求拦截器
   before && instance.interceptors.request.use(before)
-  after && instance.interceptors.response.use(after.success || (() => {}), after.fail || (() => {}))
+
+  // 响应拦截器
+  instance.interceptors.response.use(
+    onOk || (res => res.data),
+    onErr || (err => errTactics[err.response ? err.response.status : 408]())
+  )
+
   return instance
 }
 
-const commonConf = {
-  before(config) {
-    config.headers.authorization = sessionStorage.getItem('token')
-    return config
+// 需要token的请求
+export const httpWithToken = create(
+  {
+    baseURL: '/icrs-api',
+    timeout: 18000
   },
-  after: {
-    success(res) {
-      // 自行配置
-      return res.data
-    },
-    fail(err) {
-      // 自行配置
-      return err
+  {
+    before(config) {
+      config.headers.authorization = sessionStorage.getItem('token')
+      return config
     }
   }
-}
+)
 
-// 可创建多个实例
-export const httpSetting = createInstance(commonConf)
+// 无需token的请求
+export const httpWithoutToken = create(
+  {
+    baseURL: '/icrs-api',
+    timeout: 18000
+  }
+)

@@ -1,5 +1,2 @@
-/**
- * 所有接口从这里暴露
- * 业务组件中使用接口直接 import { someApi } from 'apis'即可
- */
-// export * from './module/xxx.js'
+// 通用接口 包括 登录,登出等
+export * from './modules/common'
