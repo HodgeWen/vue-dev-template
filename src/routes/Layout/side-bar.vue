@@ -10,30 +10,30 @@
         text-color="#fff"
         active-text-color="#00C1DE"
       >
-        <template v-for="(menu, index) of menus">
+        <template v-for="({ name, children, icon }) of menus">
           <!-- 一级路由中有子路由且子路由不为空 -->
-          <el-submenu v-if="menu.children && menu.children.length" :key="index" :index="index + ''">
+          <el-submenu v-if="children && children.length" :key="name" :index="name">
             <template #title>
-              <i :class="menu.icon"></i>
-              <span>{{$t(menu.name)}}</span>
+              <i :class="icon"></i>
+              <span>{{$t(name)}}</span>
             </template>
             <el-menu-item
-              v-for="({ route, name }) of menu.children"
-              :key="`${index}-${route}`"
-              :index="`${index}-${route}`"
-              @click.native="onMenuItemNativeClick(route)"
-            >{{$t(name)}}</el-menu-item>
+              v-for="({ name: routerName }) of children"
+              :key="routerName"
+              :index="`${name}-${routerName}`"
+              @click.native="onMenuItemNativeClick(routerName)"
+            >{{$t(routerName)}}</el-menu-item>
           </el-submenu>
 
           <!-- 一级路由中没有有子路由,则直接做跳转功能 -->
           <el-menu-item
             v-else
-            :key="index"
-            @click.native="onMenuItemNativeClick(menu.route)"
-            :index="menu.route"
+            :key="name"
+            @click.native="onMenuItemNativeClick(name)"
+            :index="name"
           >
-            <i :class="menu.icon"></i>
-            <span slot="title">{{$t(menu.name)}}</span>
+            <i :class="icon"></i>
+            <span slot="title">{{$t(name)}}</span>
           </el-menu-item>
         </template>
       </el-menu>
@@ -67,8 +67,7 @@ export default {
         icon: 'setting', 
         children: [
           { 
-            name: '',
-            route: ''
+            name: 'router-setting'
           }
         ] 
       }
@@ -135,7 +134,6 @@ export default {
   line-height: $header-height;
   font-size: 32px;
   font-weight: bold;
-  // background-color: $theme-color;
   background-color: $theme-color;
   box-shadow: 0 0 1px $theme-color;
   color: #ffffff;
