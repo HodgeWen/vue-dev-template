@@ -1,6 +1,6 @@
 <template>
   <aside>
-    <section class="logo">ICRS</section>
+    <section class="logo">开发模板</section>
     <el-scrollbar class="menus">
       <el-menu
         :collapse-transition="false"
