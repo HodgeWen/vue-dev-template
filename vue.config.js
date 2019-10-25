@@ -47,7 +47,7 @@ module.exports = {
   productionSourceMap: false,
 
   devServer: {
-    port: 3000,
+    port: 3000, 
     hot: true,
     inline: true,
     stats: {
@@ -56,9 +56,12 @@ module.exports = {
     overlay: {
       errors: true
     },
-    // proxy: {
-      
-    // }
+    proxy: {
+      '/api': {
+        changeOrigin: true, // 域名必开
+        target: 'http://xxx.xxx.xxx' // 将/api开头的request代理到http://xxx.xxx.xxx
+      }   
+    }
   },
 
   css: {
