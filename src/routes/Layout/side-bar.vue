@@ -116,19 +116,7 @@ export default {
         })
       }
 
-      recursive([
-        {
-          routeName: 'system',
-          routeLabel: '系统管理',
-          icon: 'el-icon-setting',
-          children: [
-            {
-              routeName: 'router-setting',
-              routeLabel: '路由设置'
-            }
-          ]
-        }
-      ])
+      recursive(this.menus)
 
       sessionCache.set('activeMap', ret)
     }
