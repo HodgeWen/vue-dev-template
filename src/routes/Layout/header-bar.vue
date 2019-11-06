@@ -5,17 +5,19 @@
       <!-- <strong>&nbsp;&nbsp;客户关系云平台</strong> -->
       <Breadcrumb class="breadcrumb" separator=">">
         <!-- layout后期要换成首页的路由名称 -->
-        <BreadcrumbItem
+        <!-- <BreadcrumbItem
           v-for="({ name, title }, index) of breadcrumbs"
           :to="breadcrumbs.length - 1 !== index ? { name } : null"
           :key="index"
-        >{{title}}</BreadcrumbItem>
+        >{{title}}</BreadcrumbItem> -->
       </Breadcrumb>
     </section>
 
     <section>
       <!-- 语言 -->
-      <Language class="margin-right" />
+      <!-- <Language class="margin-right" /> -->
+
+      <ColorPicker />
 
       <!-- 头像 -->
       <Avatar style="margin-right: 4px" size="small">{{(userInfo.userName || '').slice(0, 1)}}</Avatar>
@@ -34,14 +36,15 @@ import { Avatar, Breadcrumb, BreadcrumbItem } from 'element-ui'
 import { logout } from 'apis/index'
 import { sessionCache } from '@/cache'
 import i18n from './i18n'
-import Language from 'components/Language'
+import { Language, ColorPicker } from 'components/index'
 
 export default {
   components: {
     Avatar,
     Language,
     Breadcrumb,
-    BreadcrumbItem
+    BreadcrumbItem,
+    ColorPicker
   },
 
   i18n,
@@ -50,7 +53,9 @@ export default {
     collapse: Boolean
   },
 
-  data: vm => ({}),
+  data: vm => ({
+    colors: ''
+  }),
 
   computed: {
     // 用户信息

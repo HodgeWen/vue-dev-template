@@ -1,7 +1,7 @@
 <template>
   <el-dropdown class="v-language" trigger="click" @command="onCommand">
-    <span class="link">
-      <span class="msg">{{msg}}</span>
+    <span class="v-language__link">
+      <span class="v-language__msg">{{msg}}</span>
       <i class="el-icon-caret-bottom"></i>
     </span>
     <template #dropdown>
@@ -46,20 +46,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.v-language {
-  width: 70px;
-}
-
-.link {
-  cursor: pointer;
-  @include flex(space-between, center);
-}
-
-.msg {
-  width: 56px;
-  text-align: right;
-  @include nowrap;
-}
-</style>

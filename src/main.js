@@ -10,6 +10,7 @@ import 'styles/common.scss'
 Vue.use(plugins)
 Vue.use(components)
 
+
 Vue.config.productionTip = false
 
 new Vue({

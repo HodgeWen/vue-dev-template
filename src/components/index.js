@@ -21,13 +21,17 @@ import {
 
 import { Message } from 'element-ui'
 
-// 自定义组件
-import VTable from './Table'
-import VIcon from './Icon'
-import VButton from './Button'
-import ConfirmPopover from './ConfirmPopover'
-import Page from './Page'
-import VDialog from './Dialog'
+/* 自定义组件 start */
+import VTable from './Table' // 表格组件
+import VIcon from './Icon'    // 图标
+import VButton from './Button' // 按钮
+import ConfirmPopover from './ConfirmPopover' // 确认气泡
+import Page from './Page' // 页面
+import VDialog from './Dialog' // 弹框
+export { default as ColorPicker } from './ColorPicker' // 拾色器
+export { default as Language } from './Language' // 国际化
+import 'styles/components/index.scss' // 自定义组件的样式
+/* 自定义组件 end */
 
 const components = [
   Button,

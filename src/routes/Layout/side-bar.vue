@@ -102,21 +102,21 @@ export default {
     mapActive(menus) {
       let ret = {}
 
-      function recursive(menus, parentName = '') {
-        menus.forEach(({ children, routeName, routeLabel }) => {
-          if (children && children.length) {
-            recursive(children, routeName)
-          } else {
-            ret[routeName] = {
-              parentName,
-              routeName,
-              routeLabel
-            }
-          }
-        })
-      }
+      // function recursive(menus, parentName = '') {
+      //   menus.forEach(({ children, routeName, routeLabel }) => {
+      //     if (children && children.length) {
+      //       recursive(children, routeName)
+      //     } else {
+      //       ret[routeName] = {
+      //         parentName,
+      //         routeName,
+      //         routeLabel
+      //       }
+      //     }
+      //   })
+      // }
 
-      recursive(this.menus)
+      // recursive(this.menus)
 
       sessionCache.set('activeMap', ret)
     }
@@ -125,17 +125,17 @@ export default {
   computed: {
     // 默认展开的菜单
     defaultActive() {
-      const { meta, name } = this.$route
+    //   const { meta, name } = this.$route
 
-      // 获取路由映射的参数
-      const activeMap = sessionCache.get('activeMap')
-      if (!activeMap) return ''
+    //   // 获取路由映射的参数
+    //   const activeMap = sessionCache.get('activeMap')
+    //   if (!activeMap) return ''
 
-      // 当前激活的路由的归属
-      const activeRoute = activeMap[meta.parent ? meta.parent : name]
-      return activeRoute.parentName
-        ? activeRoute.parentName + '/' + activeRoute.routeName
-        : activeRoute.routeName
+    //   // 当前激活的路由的归属
+    //   const activeRoute = activeMap[meta.parent ? meta.parent : name]
+    //   return activeRoute.parentName
+    //     ? activeRoute.parentName + '/' + activeRoute.routeName
+    //     : activeRoute.routeName
     }
   },
 

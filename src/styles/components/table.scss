@@ -1,0 +1,44 @@
+.el-pagination {
+  text-align: right;
+  padding: 6px;
+}
+
+.v-table {
+  height: 100%;
+  position: relative;
+
+  &--fix-header {
+    height: 100%;
+  }
+
+  &__tools {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    border-bottom: 1px solid #eee;
+    padding-top: 5px;
+    @include flex(space-between, flex-start, nowrap);
+
+    &--left {
+      & > * {
+        margin-bottom: 5px;
+        margin-right: 6px;
+      }
+    }
+
+    &--right {
+      max-width: 360px;
+      white-space: nowrap;
+      & > * {
+        margin-bottom: 5px;
+        margin-left: 6px;
+      }
+    }
+  }
+
+  .el-table__header th {
+    background-color: #f0f2f5;
+    height: 50px;
+  }
+}
