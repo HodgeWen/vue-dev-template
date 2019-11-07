@@ -78,6 +78,7 @@ $bar-width: 217px;
 
 .container {
   height: 100vh;
+  position: relative;
   @include clear;
 }
 
