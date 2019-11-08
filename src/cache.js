@@ -17,3 +17,13 @@ export const sessionCache = Cache.create('sessionStorage')
 })
 
 /* 初始化本地缓存 end */
+
+/* 初始化会话缓存 start */
+
+// 系统锁定信息
+!sessionCache.get('lock-info') && localCache.set('lock-info', {
+  isInLocking: false,
+  pwd: ''
+})
+
+/* 初始化会话缓存 end */

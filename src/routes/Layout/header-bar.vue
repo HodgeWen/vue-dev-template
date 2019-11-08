@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header" :style="{ backgroundColor: $store.state.systemConfig.themeColor }">
     <section>
       <VIcon pointer size="24px" @click="$emit('toggle')" :type="collapse ? 's-unfold' : 's-fold'" />
       <!-- <strong>&nbsp;&nbsp;客户关系云平台</strong> -->

@@ -1,6 +1,8 @@
 <template>
   <aside>
-    <section class="logo">666</section>
+    <section class="logo" :style="{ backgroundColor: $store.state.systemConfig.themeColor }">
+      LOGO
+    </section>
     <el-scrollbar class="menus">
       <el-menu
         :collapse-transition="false"

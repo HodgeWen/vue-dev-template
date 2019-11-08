@@ -10,21 +10,24 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    { path: '*', name: '404', component: () => import('./Error/404.vue') },
-    { path: '/401', name: '401', component: () => import('./Error/401.vue') },
     {
       path: '/',
       name: 'layout',
       component: () => import('./Layout/index.vue'),
-      children: [
-        ...System
-      ]
+      children: [...System]
     },
     {
       path: '/login',
       name: 'login',
       component: () => import('./Login/index.vue')
-    }
+    },
+    {
+      path: '/lock',
+      name: 'lock',
+      component: () => import('./Lock/index.vue')
+    },
+    { path: '/401', name: '401', component: () => import('./Error/401.vue') },
+    { path: '*', name: '404', component: () => import('./Error/404.vue') }
   ]
 })
 

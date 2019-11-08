@@ -1,5 +1,5 @@
 <template>
-  <el-popover class="v-color" placement="left" width="246" trigger="manual" v-model="visible">
+  <el-popover class="v-color" placement="left" trigger="manual" v-model="visible">
     <Sketch class="v-color__picker" :value="value" @input="onColorInput"/>
     <div style="text-align: right; margin: 0">
       <el-button size="mini" type="text" @click="visible = false">取消</el-button>
