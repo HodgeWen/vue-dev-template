@@ -6,15 +6,15 @@
       <ul class="items">
         <li>
           <div>主题色</div>
-          <ColorPicker v-model="color" />
+          <ColorPicker :value="systemConfig.color" @change="onConfigChange('color', $event)" />
         </li>
         <li>
           <div>启用标签页</div>
-          <el-switch v-model="useTags" />
+          <el-switch :value="systemConfig.useTags" @change="onConfigChange('useTags', $event)"/>
         </li>
         <li>
           <div>启用面包屑</div>
-          <el-switch v-model="useThumb" />
+          <el-switch :value="systemConfig.useThumb" @change="onConfigChange('useThumb', $event)"/>
         </li>
         <li>
           <div>
@@ -23,11 +23,11 @@
               <i class="el-icon-question"></i>
             </el-tooltip>
           </div>
-          <el-switch v-model="useI18n" />
+          <el-switch :value="systemConfig.useI18n" @change="onConfigChange('useI18n', $event)"/>
         </li>
         <li>
           <div>启用登录欢迎</div>
-          <el-switch v-model="useLoginWelcome" />
+          <el-switch :value="systemConfig.useLoginWelcome" @change="onConfigChange('useLoginWelcome', $event)"/>
         </li>
         <li>
           <div>
@@ -36,7 +36,7 @@
               <i class="el-icon-question"></i>
             </el-tooltip>
           </div>
-          <el-switch v-model="useToggleTransition" />
+          <el-switch :value="systemConfig.useToggleTransition" @change="onConfigChange('useToggleTransition', $event)"/>
         </li>
       </ul>
     </div>
@@ -55,15 +55,14 @@ export default {
   },
 
   data: () => ({
-    drawerOn: false,
-
-    useTags: true,
-    useThumb: true,
-    useI18n: true,
-    useLoginWelcome: true,
-    useToggleTransition: false,
-    color: '#666'
+    drawerOn: false
   }),
+
+  computed: {
+    systemConfig() {
+      return this.$store.state.systemConfig
+    }
+  },
 
   methods: {
     // 打开/关闭设置栏
@@ -72,9 +71,22 @@ export default {
     },
 
     // 设置系统配置
-    setSystemConfig() {
-      const systemConfig = localCache.get('system-config')
-      this.$store.commit('setSystemConfig', systemConfig)
+    setSystemConfig(payload) {
+      const { $store } = this
+      if (payload) {
+        $store.commit('setSystemConfig', payload)
+        localCache.set('system-config', payload)
+        return 
+      }
+      $store.commit('setSystemConfig', localCache.get('system-config') || {})
+    },
+
+    // 系统设置更改
+    onConfigChange(key, value) {
+      this.setSystemConfig({
+        ...this.systemConfig,
+        [key]: value
+      })
     }
   },
 
