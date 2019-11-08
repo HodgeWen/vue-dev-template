@@ -6,19 +6,19 @@
       <ul class="items">
         <li>
           <div>主题色</div>
-          <ColorPicker :value="systemConfig.color" @change="onConfigChange('color', $event)" />
+          <ColorPicker :value="systemConfig.themeColor" @change="onConfigChange('themeColor', $event)" />
         </li>
         <li>
-          <div>启用标签页</div>
+          <div>标签页</div>
           <el-switch :value="systemConfig.useTags" @change="onConfigChange('useTags', $event)"/>
         </li>
         <li>
-          <div>启用面包屑</div>
+          <div>面包屑导航</div>
           <el-switch :value="systemConfig.useThumb" @change="onConfigChange('useThumb', $event)"/>
         </li>
         <li>
           <div>
-            启用国际化
+            国际化
             <el-tooltip effect="dark" content="需要后端支持" placement="left-end">
               <i class="el-icon-question"></i>
             </el-tooltip>
@@ -26,12 +26,12 @@
           <el-switch :value="systemConfig.useI18n" @change="onConfigChange('useI18n', $event)"/>
         </li>
         <li>
-          <div>启用登录欢迎</div>
+          <div>登录欢迎</div>
           <el-switch :value="systemConfig.useLoginWelcome" @change="onConfigChange('useLoginWelcome', $event)"/>
         </li>
         <li>
           <div>
-            启用菜单栏过渡
+            菜单栏过渡
             <el-tooltip effect="dark" content="在数据较多的表格页面,开启过度会使页面卡顿" placement="left-end">
               <i class="el-icon-question"></i>
             </el-tooltip>
@@ -108,7 +108,7 @@ $width: 240px;
   &:hover {
     .setting-button {
       opacity: 1;
-      transform: translate(0, -50%);
+      transform: translateX(0);
     }
   }
 }
@@ -126,9 +126,9 @@ $width: 240px;
 .setting-button {
   $size: 48px;
   position: absolute;
-  z-index: -100;
-  top: 50%;
-  transform: translate(24px, -50%);
+  z-index: -20;
+  top: 30%;
+  transform: translateX(24px);
   left: -$size;
   width: $size;
   height: $size;
@@ -141,7 +141,7 @@ $width: 240px;
 
   &:hover {
     opacity: 1;
-    transform: translate(0, -50%);
+    transform: translateX(0);
   }
 
   &::after {
