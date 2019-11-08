@@ -17,18 +17,24 @@
       <!-- 主视图 start -->
     </div>
     <!-- 内容区 end -->
+
+    <!-- 设置 start -->
+    <Setting />
+    <!-- 设置 end -->
   </div>
 </template>
 
 <script>
 import SideBar from './side-bar'
 import HeaderBar from './header-bar'
+import Setting from './setting'
 import { getUserInfo } from 'apis/index'
 import { sessionCache } from '@/cache'
 export default {
   components: {
     SideBar,
-    HeaderBar
+    HeaderBar,
+    Setting
   },
 
   data: () => ({

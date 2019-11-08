@@ -32,8 +32,16 @@ html, body {
  * Remove the margin in all browsers.
  */
 
-body {
+body, p, ul {
   margin: 0;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
 }
 
 /**

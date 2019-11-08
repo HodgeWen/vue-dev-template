@@ -15,7 +15,7 @@ import {
   Dialog,
   Select,
   Option,
-  Switch,
+  Tooltip,
   transfer
 } from 'element-ui'
 
@@ -49,7 +49,7 @@ const components = [
   Dialog,
   Select,
   Option,
-  Switch,
+  Tooltip,
   transfer
 ]
 

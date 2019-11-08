@@ -5,11 +5,17 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    userInfo: {} // 用户信息
+    userInfo: {}, // 用户信息
+
+    systemConfig: {}
   },
   mutations: {
     setUserInfo(state, payload) {
       state.userInfo = payload
+    },
+
+    setSystemConfig(state, payload) {
+      state.systemConfig = payload
     }
   }
 })

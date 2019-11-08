@@ -7,11 +7,11 @@ import i18n from 'i18n/index'
 import 'styles/normalize.scss'
 import 'styles/common.scss'
 
+Vue.prototype.$ELEMENT = { size: 'small' }
+Vue.config.productionTip = false
+
 Vue.use(plugins)
 Vue.use(components)
-
-
-Vue.config.productionTip = false
 
 new Vue({
   router,

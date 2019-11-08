@@ -17,8 +17,6 @@
       <!-- 语言 -->
       <!-- <Language class="margin-right" /> -->
 
-      <ColorPicker />
-
       <!-- 头像 -->
       <Avatar style="margin-right: 4px" size="small">{{(userInfo.userName || '').slice(0, 1)}}</Avatar>
       <span style="font-size: 14px" class="margin-right">{{userInfo.userName || '用户名'}}</span>
@@ -36,15 +34,14 @@ import { Avatar, Breadcrumb, BreadcrumbItem } from 'element-ui'
 import { logout } from 'apis/index'
 import { sessionCache } from '@/cache'
 import i18n from './i18n'
-import { Language, ColorPicker } from 'components/index'
+import { Language } from 'components/index'
 
 export default {
   components: {
     Avatar,
     Language,
     Breadcrumb,
-    BreadcrumbItem,
-    ColorPicker
+    BreadcrumbItem
   },
 
   i18n,
