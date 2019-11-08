@@ -1,11 +1,11 @@
 <template>
   <div class="container" :class="{folded: isCollapse}">
     <!-- 侧边栏 start -->
-    <SideBar class="aside" :collapse="isCollapse" />
+    <SideBar class="aside" :class="{'on-transition': useToggleTransition}" :collapse="isCollapse" />
     <!-- 侧边栏 end -->
 
     <!-- 内容区 start -->
-    <div class="main">
+    <div class="main" :class="{'on-transition': useToggleTransition}">
       <HeaderBar class="header" :collapse="isCollapse" @toggle="isCollapse = !isCollapse" />
 
       <!-- 主视图 start -->
@@ -40,6 +40,12 @@ export default {
   data: () => ({
     isCollapse: false
   }),
+
+  computed: {
+    useToggleTransition() {
+      return this.$store.state.systemConfig.useToggleTransition || false
+    }
+  },
 
   methods: {
     // 获取用户信息
@@ -104,8 +110,7 @@ $bar-width: 217px;
   background-color: #eef7f4;
 }
 
-.aside,
-.main {
+.on-transition {
   transition: width 0.2s;
 }
 
