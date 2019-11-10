@@ -4,10 +4,10 @@
       class="v-table__tools"
       ref="tools"
       @keyup.enter="$emit('data-fetch')"
-      v-if="headerFix && ($slots.tools || $slots.toolsLeft)"
+      v-if="headerFix"
     >
       <div class="v-table__tools--left">
-        <slot name="tools" />
+        <slot name='tools-left' />
       </div>
       <div class="v-table__tools--right">
         <!-- 重置 -->
@@ -155,7 +155,7 @@ export default {
     // 页面尺寸受到改动
     onResize () {
       const { headerFix, $slots } = this
-      if (!headerFix || !$slots.tools) return
+      if (!headerFix || (!$slots['tools-left'] && !$slots['tools-right'])) return
 
       const toolsHeight = this.$refs.tools.getBoundingClientRect().height
       this.paddingTop = toolsHeight + 5 + 'px'

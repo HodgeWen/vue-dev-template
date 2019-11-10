@@ -1,7 +1,7 @@
 <template>
   <v-page>
     <v-table :data="table.data" :columns="columns" @data-fetch="onFetch" size="small" header-fix>
-      <template #tools>
+      <template #tools-left>
         <el-input
           style="width: 120px;"
           :placeholder="$t('pleaseEnterTheQueryCriteria')"
