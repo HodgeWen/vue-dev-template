@@ -3,6 +3,7 @@
     <section
       class="v-table__tools"
       ref="tools"
+      @keyup.enter="$emit('data-fetch')"
       v-if="headerFix && ($slots.tools || $slots.toolsLeft)"
     >
       <div class="v-table__tools--left">
@@ -13,10 +14,14 @@
         <el-button
           type="warning"
           icon="el-icon-refresh"
-          size="small"
-          plain
-          @click="onReset"
-        >{{$t('reset')}}</el-button>
+          @click="$merge(query, defaultQuery); $emit('data-fetch')"
+        />
+        <!--查询 -->
+        <el-button
+          type="primary"
+          icon="el-icon-search"
+          @click="$emit('data-fetch')"
+        />
         <slot name="tools-right" />
       </div>
     </section>
@@ -26,6 +31,7 @@
       :height="tableHeight"
       :size="size"
       stripe
+      border
       v-bind="$attrs"
       v-on="$listeners"
     >
@@ -48,8 +54,8 @@
     <!-- 分页 start -->
     <el-pagination
       v-if="!noPage"
-      @size-change="onSizeChange"
-      @current-change="onPageChange"
+      @size-change="query.size = $event; $emit('data-fetch')"
+      @current-change="query.page = $event - 1; $emit('data-fetch')"
       :current-page="query.page + 1"
       :page-sizes="pageSizeList"
       :page-size="query.size"
@@ -146,20 +152,6 @@ export default {
   },
 
   methods: {
-    // 分页尺寸改变
-    onSizeChange(size) {
-      const { query } = this
-      query.size = size
-      this.$emit('fetch-data', query)
-    },
-
-    // 分页索引改变
-    onPageChange(page) {
-      const { query } = this
-      query.page = page - 1
-      this.$emit('fetch-data', query)
-    },
-
     // 页面尺寸受到改动
     onResize () {
       const { headerFix, $slots } = this
@@ -167,13 +159,6 @@ export default {
 
       const toolsHeight = this.$refs.tools.getBoundingClientRect().height
       this.paddingTop = toolsHeight + 5 + 'px'
-    },
-
-    // 重置
-    onReset () {
-      // 分页置为传进时的分页
-      this.$merge(this.query, this.defaultQuery)
-      this.$emit('fetch-data', this.query)
     },
 
     // 初始化

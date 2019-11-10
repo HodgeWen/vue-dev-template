@@ -1,45 +1,54 @@
 <template>
   <div class="setting-drawer" :class="{ on: drawerOn }">
     <div class="setting-button" @click="onToggle"></div>
-    <div class="setting-content">
-      <p class="title">系统配置</p>
-      <ul class="items">
-        <li>
-          <div>主题色</div>
-          <ColorPicker :value="systemConfig.themeColor" @change="onConfigChange('themeColor', $event)" />
-        </li>
-        <li>
-          <div>标签页</div>
-          <el-switch :value="systemConfig.useTags" @change="onConfigChange('useTags', $event)"/>
-        </li>
-        <li>
-          <div>面包屑导航</div>
-          <el-switch :value="systemConfig.useThumb" @change="onConfigChange('useThumb', $event)"/>
-        </li>
-        <li>
-          <div>
-            国际化
-            <el-tooltip effect="dark" content="需要后端支持" placement="left-end">
-              <i class="el-icon-question"></i>
-            </el-tooltip>
-          </div>
-          <el-switch :value="systemConfig.useI18n" @change="onConfigChange('useI18n', $event)"/>
-        </li>
-        <li>
-          <div>登录欢迎</div>
-          <el-switch :value="systemConfig.useLoginWelcome" @change="onConfigChange('useLoginWelcome', $event)"/>
-        </li>
-        <li>
-          <div>
-            菜单栏过渡
-            <el-tooltip effect="dark" content="在数据较多的表格页面,开启过度会使页面卡顿" placement="left-end">
-              <i class="el-icon-question"></i>
-            </el-tooltip>
-          </div>
-          <el-switch :value="systemConfig.useToggleTransition" @change="onConfigChange('useToggleTransition', $event)"/>
-        </li>
-      </ul>
-    </div>
+    <el-scrollbar class="setting-content">
+        <p class="title">系统配置</p>
+        <ul class="items">
+          <li>
+            <div>主题色</div>
+            <ColorPicker
+              :value="systemConfig.themeColor"
+              @change="onConfigChange('themeColor', $event)"
+            />
+          </li>
+          <li>
+            <div>标签页</div>
+            <el-switch :value="systemConfig.useTags" @change="onConfigChange('useTags', $event)" />
+          </li>
+          <li>
+            <div>面包屑导航</div>
+            <el-switch :value="systemConfig.useThumb" @change="onConfigChange('useThumb', $event)" />
+          </li>
+          <li>
+            <div>
+              国际化
+              <el-tooltip effect="dark" content="需要后端支持" placement="left-end">
+                <i class="el-icon-question"></i>
+              </el-tooltip>
+            </div>
+            <el-switch :value="systemConfig.useI18n" @change="onConfigChange('useI18n', $event)" />
+          </li>
+          <li>
+            <div>登录欢迎</div>
+            <el-switch
+              :value="systemConfig.useLoginWelcome"
+              @change="onConfigChange('useLoginWelcome', $event)"
+            />
+          </li>
+          <li>
+            <div>
+              菜单栏过渡
+              <el-tooltip effect="dark" content="在数据较多的表格页面,开启过度会使页面卡顿" placement="left-end">
+                <i class="el-icon-question"></i>
+              </el-tooltip>
+            </div>
+            <el-switch
+              :value="systemConfig.useToggleTransition"
+              @change="onConfigChange('useToggleTransition', $event)"
+            />
+          </li>
+        </ul>
+    </el-scrollbar>
   </div>
 </template>
 
@@ -76,7 +85,7 @@ export default {
       if (payload) {
         $store.commit('setSystemConfig', payload)
         localCache.set('system-config', payload)
-        return 
+        return
       }
       $store.commit('setSystemConfig', localCache.get('system-config') || {})
     },
@@ -104,7 +113,7 @@ $width: 240px;
   right: -$width;
   width: $width;
   transition: transform 0.3s;
-  z-index: 10;
+  z-index: 4;
   &:hover {
     .setting-button {
       opacity: 1;
@@ -116,11 +125,18 @@ $width: 240px;
 .setting-content {
   width: 100%;
   height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
   background: #f2f2f2;
-  padding: 20px;
+  padding: 20px 0;
+
+  ::v-deep {
+    .el-scrollbar__wrap {
+      overflow-x: visible;
+    }
+
+    .el-scrollbar__view {
+      padding: 0 20px;
+    }
+  }
 }
 
 .setting-button {

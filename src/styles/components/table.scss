@@ -20,14 +20,18 @@
     padding-top: 5px;
     @include flex(space-between, flex-start, nowrap);
 
-    &--left {
+    .el-button {
+      margin-left: 0;
+    }
+
+    & &--left {
       & > * {
         margin-bottom: 5px;
         margin-right: 6px;
       }
     }
 
-    &--right {
+    & &--right {
       max-width: 360px;
       white-space: nowrap;
       & > * {
@@ -38,7 +42,6 @@
   }
 
   .el-table__header th {
-    background-color: #f0f2f5;
     height: 50px;
   }
 }

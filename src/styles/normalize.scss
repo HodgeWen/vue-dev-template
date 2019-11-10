@@ -21,7 +21,7 @@ html, body {
  */
 
  html {
-  line-height: 1.15; /* 1 */
+  line-height: 1; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
 }
 
@@ -62,8 +62,8 @@ h1 {
   margin: 0.67em 0;
 }
 
-/* Grouping content
-   ========================================================================== */
+// /* Grouping content
+//    ========================================================================== */
 
 /**
  * 1. Add the correct box sizing in Firefox.
@@ -182,9 +182,7 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: inherit; /* 1 */
   font-size: 100%; /* 1 */
-  line-height: 1.15; /* 1 */
   margin: 0; /* 2 */
 }
 

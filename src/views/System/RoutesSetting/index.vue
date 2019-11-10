@@ -1,26 +1,17 @@
 <template>
   <v-page>
-    <v-table :data="table.data" :columns="columns" size="small" header-fix>
+    <v-table :data="table.data" :columns="columns" @data-fetch="onFetch" size="small" header-fix>
       <template #tools>
         <el-input
           style="width: 120px;"
-          size="small"
           :placeholder="$t('pleaseEnterTheQueryCriteria')"
           v-model="query.name"
+          clearable
         ></el-input>
-        <!--查询 -->
-        <el-button
-          type="primary"
-          icon="el-icon-search"
-          size="small"
-          @click="dialog.show = false"
-        >{{$t('query')}}</el-button>
-
+      
         <!-- 查看子页面 -->
         <el-button
           type="primary"
-          size="small"
-          plain
           @click="$router.push({ name: 'router-child' })"
         >子页面</el-button>
       </template>
@@ -30,7 +21,6 @@
         <el-button
           type="primary"
           icon="el-icon-plus"
-          size="small"
           plain
           @click="openAdd"
         >{{$t('add')}}</el-button>
@@ -54,6 +44,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import Language from 'components/Language'
 import i18n from './i18n'
 import { pageRequest } from 'mixins/index'
@@ -117,6 +108,10 @@ export default {
   }),
 
   methods: {
+    onFetch(e) {
+      console.log(e)
+    },
+
     onSubmit() {
       this.$msg.success('提交成功')
     },
