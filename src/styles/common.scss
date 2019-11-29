@@ -29,4 +29,18 @@
 
 /* 布局 start */
 
+// 两栏 / 三栏 / 四栏
+@for $grid from 2 to 4 {
+  .el-form-grid-#{$grid} {
+    @include flex(flex-start, flex-start);
+    .el-form-item {
+      width: (96% / $grid);
+  
+      &:not(:nth-child(#{$grid}n - 1)) {
+        margin-left: (4% / ($grid - 1));
+      }
+    }
+  }
+}
+
 /* 布局 end */
