@@ -1,7 +1,6 @@
 import { localCache } from '@/cache'
 import Vue, { VueConstructor } from 'vue'
 import { ElMessageComponent } from 'element-ui/types/message'
-import { ElementUIComponent } from 'element-ui/types/component'
 /* 样式初始化和通用样式 start */
 import 'styles/normalize.scss'
 import 'styles/common.scss'
@@ -36,7 +35,7 @@ import { Message, Loading, Notification } from 'element-ui'
 
 /* 自定义组件 start */
 import 'styles/components/index.scss' // 自定义组件的样式
-import VTable from './Table.vue' // 表格组件
+import VTable from './Table/index.vue' // 表格组件
 // import VIcon from './Icon'    // 图标
 // import VButton from './Button' // 按钮
 // import ConfirmPopover from './ConfirmPopover' // 确认气泡
@@ -141,7 +140,7 @@ declare module 'vue/types/vue' {
 }
 
 declare module 'element-ui/types/element-ui' {
-  export class Scrollbar extends ElementUIComponent {}
+  export class Scrollbar extends Vue {}
 }
 
 

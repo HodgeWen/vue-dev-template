@@ -32,35 +32,93 @@ interface ConfirmPopOptions extends Options {
 
 declare module 'vue/types/vue' {
   interface Vue {
+    /**
+     * 异步合并数据
+     * @param target 目标对象
+     * @param provider 提供者对象
+     * @param keys 指定字段
+     */
     $merge(target: O, provider: O, keys?: string[]): Promise<any>;
 
+    /**
+     * 同步合并数据
+     * @param target 目标对象
+     * @param provider 提供者对象
+     * @param keys 指定字段
+     */
     $mergeSync(target: O, provider: O, keys?: string[]): void;
-
+    
+    /**
+     * 异步数据注入
+     * @param provider 提供者
+     * @param targets 目标对象
+     * @param keys 指定字段
+     */
     $inject(provider: O, targets: O[], keys?: string[]): Promise<any>;
 
-    $inject(provider: O, targets: O[], keys?: string[]): void;
+    /**
+     * 同步数据注入
+     * @param provider 提供者
+     * @param targets 目标对象
+     * @param keys 指定字段
+     */
+    $injectSync(provider: O, targets: O[], keys?: string[]): void;
 
+    /**
+     * 是否是空值
+     * @param value 任意值
+     */
     $isEmpty(value: any): boolean;
-
+    
+    /**
+     * 获取任意值的类型
+     * @param value 任意值
+     */
     $getType(value: any): string;
 
+    /**
+     * 验证表单的字段
+     * @param refName 引用名
+     * @param field 字段
+     */
     $validate(refName: string, field?: string): Promise<boolean> | boolean;
-
+    
+    /**
+     * 清空字段值和验证
+     * @param refName 引用名
+     */
     $resetFields(refName: string): void;
 
+    /**
+     * 清除验证
+     * @param refName 引用名
+     * @param props 验证的字段
+     */
     $clearValidate(refName: string, props: string[] | string): void;
 
     $createOpration(options: OprationOptions): VNode;
 
     $createConfirmPop(options: ConfirmPopOptions): VNode;
+    
+    /**
+     * 调试
+     * @param args 参数
+     */
+    $log(...args: any[]): void;
+    
+    /**
+     * 调试
+     * @param args 参数列表
+     */
+    $dir(...args: any[]): void;
   }
 }
 
 export default function (Vue: VueConstructor) {
   let pt = Vue.prototype
 
-   // 数据合并
-   pt.$merge = function(target: O, provider: O, keys: string []) {
+  // 数据合并
+  pt.$merge = function(target: O, provider: O, keys: string []) {
     return new Promise((resolve, reject) => {
       if (!provider) return reject('$merge方法的第二个参数不能为空')
 
@@ -247,6 +305,15 @@ export default function (Vue: VueConstructor) {
       ]
     )
   }
+
+  pt.$log = function (...args: any[]) {
+    console.log(...args)
+  }
+
+  pt.$dir = function (...args: any[]) {
+    console.dir(...args)
+  }
+
 
   // 创建数据模型
   // pt.$createDataModel = function(mixinData: O) {

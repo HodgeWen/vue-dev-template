@@ -20,7 +20,7 @@ export const getMenus = () => httpWithToken.get('/menus')
 export const getDicts = async () => {
   const dicts = sessionCache.get('dicts')
   if (dicts) return store.commit('setDicts', dicts)
-  const res = await httpWithToken.post<any, { code: number; content: any; msg: string }>('/dict/list/classify', {})
+  const res = await httpWithToken.post('/dict/list/classify', {})
   if (res.code !== 200) return
   sessionCache.set('dicts', res.content)
   store.commit('setDicts', dicts)

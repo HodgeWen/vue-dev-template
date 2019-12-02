@@ -1,5 +1,4 @@
 import { httpWithToken } from '../axios.js'
-import { BinaryLike } from 'crypto'
 
 // 角色
 /**
@@ -57,7 +56,7 @@ export const increasePersonnel = (data: {
   attachmentType?: string
   code?: string
   email?: string
-  file: BinaryLike;
+  file: any;
   mobile: string
   name: string
   note: string
@@ -81,7 +80,7 @@ export const updatePersonnel = (
     attachmentType?: string
     code?: string
     email?: string
-    file: BinaryLike
+    file: any
     mobile: string
     name: string
     note: string
