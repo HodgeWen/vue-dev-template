@@ -88,9 +88,7 @@ import { CreateElement, RenderContext } from 'vue'
     RenderItem: {
       functional: true,
       props: {
-        render: {
-          type: Function
-        },
+        render: Function,
         ctx: {
           type: Object,
           default: () => ({})

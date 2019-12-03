@@ -1,3 +1,13 @@
+<template>
+  <div class="home">
+    <v-table
+      ref="table"
+      action="/customer/page"
+      :params="params"
+      :columns="columns"
+    />
+  </div>
+</template>
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator'
 import { CreateElement, VNode } from 'vue'
@@ -25,12 +35,5 @@ export default class Home extends Vue {
   private params = {
     name: ''
   }
-
-  render() {
-    return (
-      1 ? <span>1</span> : <span>0</span>
-    )
-  }
-
 }
 </script>
