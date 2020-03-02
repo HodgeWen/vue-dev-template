@@ -1,6 +1,6 @@
-import { httpWithoutToken, httpWithToken } from '../axios.js'
-import { sessionCache } from '../../cache.js'
-import store from '../../store.js'
+import { httpWithoutToken, httpWithToken } from '../axios'
+import { sessionCache } from '@/cache'
+import store from '@/store'
 // 登录, 获取token
 export const login = (data: {
   code: string;

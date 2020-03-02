@@ -50,7 +50,7 @@ module.exports = {
       errors: true
     },
     proxy: makeProxy(
-      ['/lulu', 'http://172.16.10.200:18084']
+      ['/xxx', 'http://xxx.xxx.com']
     )
   }
 }

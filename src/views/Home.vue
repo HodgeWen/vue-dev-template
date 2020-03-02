@@ -2,7 +2,6 @@
   <div class="home">
     <v-table
       ref="table"
-      action="/customer/page"
       :params="params"
       :columns="columns"
     />
@@ -27,9 +26,6 @@ export default class Home extends Vue {
     { label: '标题二', prop: 'b' },
     { label: '标题三', prop: 'c' },
     { label: '标题四', prop: 'd' },
-    // { label: '标题四', render: (h: CreateElement, { row }: ColumnData) => {
-    //   return (<span v-if={row}>{ row.name }</span>)
-    // } }
   ]
 
   private params = {
