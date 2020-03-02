@@ -1,0 +1,18 @@
+.v-dialog {
+  .el-dialog {
+    border-radius: 6px;
+
+    &__header {
+      padding: 14px 16px;
+      border-bottom: 1px solid #e8eaec;
+    }
+
+    &__body {
+      padding: 16px;
+    }
+    &__footer {
+      padding: 10px 16px;
+      border-top: 1px solid #e8eaec;
+    }
+  }
+}

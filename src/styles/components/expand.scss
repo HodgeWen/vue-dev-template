@@ -1,0 +1,29 @@
+$medium: 36px;
+$small: 32px;
+$medium: 28px;
+
+.v-expand {
+  width: 100%;
+  @include flex(flex-start, flex-start);
+
+  &-item {
+    @include clear;
+    &__label, &__content {
+      line-height: 40px;
+    }
+
+    &__label {
+      float: left;
+      text-align: right;
+      padding-right: 10px;
+    }
+  }
+
+  @each $name, $size in (medium, 36px), (small, 32px), (mini, 28px) {
+    &-item--#{$name} {
+      .v-expand-item__label, .v-expand-item__content {
+        line-height: $size;
+      }
+    }
+  }
+}
