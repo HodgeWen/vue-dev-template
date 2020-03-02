@@ -1,7 +1,5 @@
 module.exports = {
-  presets: [
-    '@vue/cli-plugin-babel/preset'
-  ],
+  presets: ['@vue/app', '@vue/babel-preset-jsx'],
   plugins: [
     [
       'component',
@@ -9,6 +7,7 @@ module.exports = {
         libraryName: 'element-ui',
         styleLibraryName: 'theme-chalk'
       }
-    ]
+    ],
+    '@babel/plugin-proposal-optional-chaining'
   ]
 }

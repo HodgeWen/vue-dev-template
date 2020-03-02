@@ -24,4 +24,8 @@
     box-shadow: none;
     padding: 0;
   }
+
+  &__pop {
+    z-index: 3500 !important;
+  }
 }

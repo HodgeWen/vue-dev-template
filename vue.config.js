@@ -6,7 +6,9 @@ const getDirs = (url = 'src') => fs.readdirSync(resolve(url)).filter(file => fs.
 
 // 创建代理规则
 const makeProxy = (...configs) => {
-  let ret = {}
+  let ret = {
+    '/group': { target: 'http://172.16.188.139:22999' }
+  }
   configs.forEach(([prefix, ip]) => ret[prefix] = {
     target: ip, pathRewrite: { [prefix]: '' }
   })
@@ -32,7 +34,7 @@ module.exports = {
   pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'scss',
-      patterns: [resolve('src/styles/mixins.scss')]
+      patterns: [resolve('src/styles/mixins.scss'), resolve('src/styles/theme-var.scss')]
     }
   },
 
@@ -50,7 +52,11 @@ module.exports = {
       errors: true
     },
     proxy: makeProxy(
-      ['/xxx', 'http://xxx.xxx.com']
+      ['/lulu', 'http://172.16.10.200:8762'],
+      ['/chenqi', 'http://172.16.10.152:8762'],
+      ['/dev', 'http://172.16.100.37:8762'],
+      ['/remote', 'http://zs.cloudkeeper.cn/']
     )
   }
 }
+

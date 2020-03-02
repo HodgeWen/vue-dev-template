@@ -4,10 +4,11 @@
 }
 
 .v-table {
-  height: 100%;
   position: relative;
   outline: none;
   background: #fff;
+  width: 100%;
+  
   &--fix-header {
     height: 100%;
   }
