@@ -8,6 +8,7 @@
   </div>
 </template>
 <script lang="tsx">
+import Table from 'components/Table/index.vue'
 import { Component, Vue } from 'vue-property-decorator'
 import { CreateElement, VNode } from 'vue'
 
@@ -31,5 +32,11 @@ export default class Home extends Vue {
   private params = {
     name: ''
   }
+
+  // render() {
+  //   return (
+  //     <Table />
+  //   )
+  // }
 }
 </script>

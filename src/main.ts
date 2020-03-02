@@ -7,7 +7,7 @@ import plugins from 'utils/plugins'
 Vue.config.productionTip = false
 
 Vue.use(plugins)
-Vue.use(components)
+// Vue.use(components)
 
 new Vue({
   router,
