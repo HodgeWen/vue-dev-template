@@ -1,3 +1,0 @@
-import { Res } from './types'
-
-
