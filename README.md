@@ -465,3 +465,132 @@ render-day | 将data中的内容渲染到日历中 | Function | - | -
 提供了默认值选项，其他属性和El一致。
 
 ## 选择器 VSelect
+
+# Vue 插件
+Vue的插件是一些添加在Vue原型上的方法，在每个Vue组件中都可以使用this.method(params)的方式去调用，并且所有的方法已经与Vue模块进行声明的合并.
+一下的关于参数的描述中, 以[  ]包起来的为可选参数.
+
+## 数据合并 $merge $mergeSync
+- 第一个参数是目标对象, 第二个参数是提供者, [ 第三个参数是指定的需要合并的属性的数组. ]
+- $merge方法是异步的，内部使用$nextTick将数据合并操作放在了dom更新之后，通常情况下会在dialog第一次渲染的时候用到，因为ElForm组件的model属性总是在dom渲染之后决定.
+- 通常情况下使用 $mergeSync方法.
+
+``` js
+export default {
+    // ...
+    data: () => ({
+        obj: {
+            name: '',
+            age: null,
+            mail: ''
+        }
+    }),
+    methods: {
+        async onOpened() {
+           const res = await requestApi()
+
+           if (!res || res.code !== 200) return
+           //  this.$merge(this.obj, res.content)
+           //  this.$merge(this.obj, res.content, ['name', 'mail'])
+           //  this.$mergeSync(this.obj, res.content)
+        }
+    }
+    // ... 
+}
+```
+
+
+## 数据注入 $inject $injectSync
+- 第一个参数是数据提供者对象, 第二个参数需要注入的目标对象的数组, 第三个参数是指定的需要注入的属性的数组.
+- $inject是异步的, 内部使用$nextTick将数据合并操作放在了dom更新之后，通常情况下会在dialog第一次渲染的时候用到，因为ElForm组件的model属性总是在dom渲染之后决定.
+- 通常情况下使用 $injectSync方法.
+
+## 检测一个变量是否是空值 $isEmpty 
+- 参数为number, string, object, array的一种, 其他类型的值都会返回false
+- 例子: {} 返回true, [] 返回true, '' 返回true, 0 返回true
+
+## 检测一个值的类型 $getType
+``` js
+export default {
+    // ...
+    data: () => ({
+        value: null
+    }),
+    methods: {
+        doSth() {
+            const type = this.$getType()
+            if (type === 'String') {
+                this.$log('字符串')
+            } else if(type === 'Array') {
+                this.$log('数组')
+            } else {
+                this.$log('非字符串非数组')
+            }
+        }
+    }
+    // ... 
+}
+```
+
+## 表单验证 $validate 
+- 第一个参数为组件的引用名, [ 第二个字段为需验证的字段的key, 没有则验证所有 ]
+- 和El的规则不同的是, 该方法不会走入catch中, 减少了代码步骤, 如:   
+``` js
+export default {
+    // ...
+    methods: {
+        async submit() {
+            // 假设该form组件应用名为 'form'
+            const valid = await this.$validate('form')
+            valid && doSomething()
+        }
+    }
+    // ... 
+}
+```
+
+## 初始化对象 $initData
+- 第一个参数为需要被初始化的目标对象, [ 第二个参数为自定义不同零值的配置 ]
+- 通常用在清空对象的属性值时使用
+``` js
+export default {
+    // ...
+    data: () => ({
+        student: {
+            name: '张三',
+            age: 14,
+            height: 152
+        }
+    }),
+    beforeDestroy() {
+        this.$initData(this.student)
+        // { name: '', age: 0, height: 0 }
+        this.$initData(this.student, {
+            Number: null,
+            String: null
+        })
+        // { name: null, age: null, height: null }
+    }
+    // ... 
+}
+```
+
+## 调试函数 $log $dir
+- 即 分别为console.log和console.dir 的别名
+- 用途在于可以直接在模板里写并随之删除, 保持代码的美观
+
+## 创建远程验证器 $makeAsyncValidator
+- 第一个参数为验证的接口函数, [ 第二个参数为验证错误信息, 默认值为 '已存在' ]
+- 该方法和后端接口耦合, 耦合的地方在于传入后台的验证参数, 必要时更改该函数
+
+``` js
+export default {
+    // ...
+    data: (vm) => ({
+        rules: [
+            { validator: vm.$makeAsyncValidator(requestApi), trigger: 'blur' }
+        ]
+    })
+    // ... 
+}
+```
