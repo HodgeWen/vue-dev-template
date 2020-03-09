@@ -3,10 +3,10 @@
     <div class="v-calendar__header">
       <ElDatePicker
         type="month"
-        v-model="date"
+        :value="date"
         :clearable="false"
         style="width: 200px; margin-right: 10px"
-        @change="handleChange"
+        @input="handleChange"
       />
 
       <slot name="header"></slot>
