@@ -1,0 +1,1 @@
+export function format<T = string>(date: Date, fmt: T): T

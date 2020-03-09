@@ -248,7 +248,7 @@ let str
 下方是请求失败的响应, 注意content应始终返回一个[零值](##零值)
 ``` json
 {
-    "code": "500",
+    "code": 500,
     "msg": "服务不可用",
     "content": {}
 }
@@ -323,7 +323,7 @@ element 分页, 增加键盘操作
 
 参数 | 说明 | 类型 | 可选值 | 默认值
 :----------- | :----------- | :------- | :--------- | :-----------
-columns | [列配置项列表](###列配置项) | Array | - | []
+columns | [列配置项列表](###列配置项列表-column-configurations) | Array | - | []
 page-size-list | 分页尺寸配置 | Array | - | [10, 20, 40]
 height | 表格高度 | String | - | -
 layout | 分页组件的组成元素 | String | - | "total, sizes, prev, pager, next, jumper"
@@ -332,7 +332,7 @@ header-fix | 固定表头 | Boolean | - | true
 size | 表格尺寸 | String | medium/small/large | -
 action | 数据来源地址 | String | - | -
 params | 请求的请求体 | Object | - | {}
-placeholder | 空值占位符 | String | - | '——'
+placeholder | 空值占位符 | String | - | ——
 no-reset | 无重置按钮 | Boolean | - | false
 map-handler | 数据格式映射 | Function | - | -
 hide-search-button | 隐藏搜索按钮, 默认情况下只要有查询条件就会有 | Boolean | - | false 
@@ -361,7 +361,8 @@ operations | Function/Array | 生成操作按钮
 
 > render operations formatter  三者同时存在只有一种能够生效, 优先级从左往右依次
 
-> operations 返回的是一个二维数组, 其中第二维的数组的第一个元素是按钮名称, 第二个元素是注册到表格的事件,
+> operations 是一个二维数组或者一个返回二维数组的函数, 其中第二维的数组的第一个元素是按钮名称, 第二个元素是注册到表格的事件, 如果是一个函数， 则函数的参数返回的是一个表格记录的对象
+
 > 第三个元素可选, 如果有则会提供一个确认框, 该元素作为确认框的提示内容.
 
 ``` html
@@ -400,14 +401,14 @@ export default {
             {
                 label: '操作',
 
-                
+                // operations: [['编辑', 'edit'], ['查看', 'view']],
+                // or
                 operations({ row }) {
                     if (row.status === 'FINISHED') {
                         return [['查看', 'view']]
                     }
                     return [['编辑', 'edit']]
                 }
-                operations: [['编辑', 'edit'], ['查看', 'view']]
             }
         ]
     })
@@ -425,16 +426,42 @@ tools-right | 右侧工具栏插槽
 
 ## 页面 VPage
 
+### 对扩展开放， 对修改关闭。  
+如果一个页面有个性化的东西， 只需修改此组件即可。
+
+
 ## 对话框 VDialog
+对话框属于非常常见的组件，我们不应该将过多的精力放在上面，因此二次封装了El的对话框组件， 更加易用。
+
+### 特有属性 Props
+
+参数 | 说明 | 类型 | 可选值 | 默认值
+:----------- | :----------- | :------- | :--------- | :-----------
+v-model | - | Boolean | true/false | false
+view | 开启视图模式用来移除确认按钮等 | Boolean | true/false | false
+cancel-text | 取消按钮的文本 | String | - | 取消
+confirm-text | 确认按钮的文本 | String | - | 确定
+confirm-method | 点击确认按钮后的回调，Mixin中有相关的方法可以直接使用 | Function | - | -
 
 ## 日历 VCalendar
+El在最近的更新中增加了日历组件， 但是不能满足更多的需求， 比如个性化日历操作等等。
+
+### 属性 Props
+
+参数 | 说明 | 类型 | 可选值 | 默认值
+:----------- | :----------- | :------- | :--------- | :-----------
+week | 自定义周日到周六的文本 | Array<String> | - | ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
+data | 定义一个月中每天的映射内容， 需要与render-day一起使用 | Object | - | -
+render-day | 将data中的内容渲染到日历中 | Function | - | -
+
 
 ## 上传 VUpload
+该组件与后端接口所需属性一致。
 
 ## 图片上传 VImageUpload
+该组件与后端接口所需属性一致。
 
 ## 输入框 VInput
+提供了默认值选项，其他属性和El一致。
 
 ## 选择器 VSelect
-
-## Confirm VSelect
