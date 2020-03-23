@@ -36,29 +36,15 @@ function create(options, interceptor = {}) {
 
 export const httpDefault = create(null)
 
-export const httpIdentity = create({
-  baseURL: 'api-identity'
-})
-
-export const httpClient = create({
-  baseURL: 'api-customer'
-})
-
-export const httpMould = create({
-  baseURL: 'api-mould'
-})
-
-export const httpCasting = create({
-  baseURL: 'api-casting'
-})
-
 // 无需token的请求 登录
 export const httpWithoutToken = create({ headers: null }, {
-  onOk({ data, status }) {
-    if (data.code && errTactics[data.code]) {
-      return errTactics[data.code](data)
+  onOk(response) {
+    const { data, status } = response
+
+    return {
+      code: status,
+      content: data
     }
-    return status === 200 ? { ...data, code: 200 } : errTactics[status](data)
   },
   before: null
 })

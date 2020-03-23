@@ -2,7 +2,7 @@
   <aside>
     <section class="logo">
       <div class="logo__box">
-        <img src="~images/logo.png">
+        后台
       </div>
     </section>
     <el-scrollbar class="menus">

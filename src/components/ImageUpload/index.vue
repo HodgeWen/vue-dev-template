@@ -23,7 +23,6 @@
 
 <script>
 import {  } from 'apis/index'
-import { FILE_SERVER } from 'utils/constants'
 export default {
   name: 'VImageUpload',
 
@@ -36,7 +35,7 @@ export default {
 
     fileServer: {
       type: String,
-      default: FILE_SERVER
+      default: ''
     }
   },
 

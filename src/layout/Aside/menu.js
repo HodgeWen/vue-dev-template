@@ -1,9 +1,11 @@
 export default [
   {
-    label: '基础资料',
+    label: '系统',
     icon: 'base',
     children: [
-      { label: '数据字典管理', name: 'dicts' }
+      { label: '账户', name: 'accounts' },
+      { label: '海报', name: 'poster' },
+      { label: '活动', name: 'activity' }
     ]
   }
 ]

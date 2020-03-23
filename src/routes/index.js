@@ -36,16 +36,16 @@ const router = new Router({
 // 路由守卫
 router.beforeEach((to, from, next) => {
   // 除了登录页之外的所有页面都需要token, 否则返回登录页
-  if (to.name !== 'login' && !sessionCache.get('token')) {
-    return next({ name: 'login' })
-  }
+  // if (to.name !== 'login' && !sessionCache.get('token')) {
+  //   return next({ name: 'login' })
+  // }
 
-  // 锁定的页面不能进入任何其他页面
-  if (to.name !== 'lock' && sessionCache.get('lock-info')) {
-    return next({ name: 'lock', replace: true })
-  }
+  // // 锁定的页面不能进入任何其他页面
+  // if (to.name !== 'lock' && sessionCache.get('lock-info')) {
+  //   return next({ name: 'lock', replace: true })
+  // }
 
-  // 通过
+  // // 通过
   next()
 })
 

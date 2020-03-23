@@ -6,11 +6,9 @@ const getDirs = (url = 'src') => fs.readdirSync(resolve(url)).filter(file => fs.
 
 // 创建代理规则
 const makeProxy = (...configs) => {
-  let ret = {
-    '/group': { target: 'http://172.16.188.139:22999' }
-  }
+  const ret = {}
   configs.forEach(([prefix, ip]) => ret[prefix] = {
-    target: ip, pathRewrite: { [prefix]: '' }
+    target: ip, pathRewrite: { [prefix]: '' }, changeOrigin: true
   })
   return ret
 }
@@ -52,10 +50,7 @@ module.exports = {
       errors: true
     },
     proxy: makeProxy(
-      ['/lulu', 'http://172.16.10.200:8762'],
-      ['/chenqi', 'http://172.16.10.152:8762'],
-      ['/dev', 'http://172.16.100.37:8762'],
-      ['/remote', 'http://zs.cloudkeeper.cn/']
+      ['/remote', 'http://chain.lamagao.cn']
     )
   }
 }

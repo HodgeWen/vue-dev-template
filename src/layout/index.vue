@@ -76,6 +76,23 @@ export default {
     }
   },
 
+  watch: {
+    $route: {
+      immediate: true,
+      handler(newVal) {
+        if (!newVal.meta.title) return
+        let title = document.getElementsByTagName('title')[0]
+        if (title) {
+          title.innerText = newVal.meta.title
+        } else {
+          title = document.createElement('title')
+          title.innerText = newVal.meta.title
+          document.head.appendChild(title)
+        }
+      }
+    }
+  },
+
   mounted() {
     this.commitUserInfo() // 用户信息
     this.welcome()        // 登录欢迎

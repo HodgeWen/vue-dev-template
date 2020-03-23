@@ -1,4 +1,3 @@
-// /dev /lulu /chenqi
-export const BASE_URL = process.env.NODE_ENV === 'development' ? '/remote' : ''
+const isDev = process.env.NODE_ENV === 'development'
 
-export const FILE_SERVER = 'http://172.16.188.139:22999'
+export const BASE_URL = isDev ? '/remote' : '/remote'

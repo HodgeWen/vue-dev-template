@@ -78,15 +78,15 @@
       :current-page="query.page + 1"
       :page-sizes="pageSizeList"
       :page-size="query.size"
-      :layout="layout"
-      :total="total"
+      :layout="isList ? 'total' : layout"
+      :total="customData ? customData.length : total"
     />
     <!-- 分页 end -->
   </div>
 </template>
 
 <script>
-import { httpDefault } from 'apis/axios'
+import { httpWithoutToken } from 'apis/axios'
 export default {
   name: 'VTable',
 
@@ -160,6 +160,8 @@ export default {
 
     mapHandler: Function,
 
+    isList: Boolean,
+
     hideSearchButton: Boolean
   },
 
@@ -199,6 +201,7 @@ export default {
   },
 
   methods: {
+    // 获取最终渲染的数据
     getData() {
       let { action, data, customData, mapHandler } = this
       let _data = action ? data : customData
@@ -281,28 +284,22 @@ export default {
     async fetch() {
       if (!this.action) return
 
-      const isList = this.action.lastIndexOf('list') !== -1
-
-      if (isList) {
+      if (this.isList) {
         delete this.query.size
         delete this.query.page
       }
 
       this.loading = true
-      const res = await httpDefault.post(this.action, this.params, {
-        params: this.query
+      const res = await httpWithoutToken.get(this.action, {
+        params: this.params
       })
       this.loading = false
-      
-      if (res.code !== 200) return
 
-      if (isList) {
+      if (res.code !== 200) return
+      
+      if (this.isList) {
         this.data = res.content
         this.total = res.content.length
-      } else {
-        const { content, totalElements } = res.content
-        this.data = content
-        this.total = totalElements
       }
     },
 

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { BASE_URL, FILE_SERVER } from 'utils/constants'
+import { BASE_URL } from 'utils/constants'
 import { sessionCache } from '@/cache'
 export default {
   name: 'VUpload',
@@ -28,8 +28,7 @@ export default {
 
   props: {
     fileServer: {
-      type: String,
-      default: FILE_SERVER
+      type: String
     },
 
     action: {
